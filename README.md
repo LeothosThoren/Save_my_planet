@@ -1,2 +1,2 @@
-# save-my-planet
+# Save my planet
 An app which help consumer to avoid palm oil by scanning products, in order to avoid environmental disaster...
