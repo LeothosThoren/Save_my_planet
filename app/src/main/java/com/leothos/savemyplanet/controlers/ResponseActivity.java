@@ -16,22 +16,15 @@
 
 package com.leothos.savemyplanet.controlers;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatImageView;
 import android.util.Log;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import com.google.android.gms.common.api.CommonStatusCodes;
-import com.google.android.gms.vision.barcode.Barcode;
 import com.leothos.savemyplanet.R;
 
 import static com.leothos.savemyplanet.controlers.BarcodeCaptureActivity.BarcodeObject;
-import static com.leothos.savemyplanet.controlers.BarcodeCaptureActivity.RC_BARCODE;
 
 /**
  * Main activity demonstrating how to pass extra parameters to an activity that
@@ -39,14 +32,11 @@ import static com.leothos.savemyplanet.controlers.BarcodeCaptureActivity.RC_BARC
  */
 public class ResponseActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private static final int RC_BARCODE_CAPTURE = 9001;
+    private static final String TAG = ResponseActivity.class.getSimpleName();
     // use a compound button so either checkbox or switch widgets work.
-    private CompoundButton autoFocus;
-    private CompoundButton useFlash;
     private TextView statusMessage;
     private TextView barcodeValue;
-
-    private static final int RC_BARCODE_CAPTURE = 9001;
-    private static final String TAG = "BarcodeMain";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +46,11 @@ public class ResponseActivity extends AppCompatActivity implements View.OnClickL
         statusMessage = findViewById(R.id.status_message);
         barcodeValue = findViewById(R.id.barcode_value);
 
-        autoFocus = findViewById(R.id.auto_focus);
-        useFlash = findViewById(R.id.use_flash);
+        String barcode = getIntent().getStringExtra(BarcodeObject);
+        Log.d(TAG, "onCreate: barcode = "+barcode);
 
-        findViewById(R.id.read_barcode).setOnClickListener(this);
-//        String barcode = getIntent().getStringExtra(BarcodeObject);
-//        barcodeValue.setText(barcode);
+        statusMessage.setText(R.string.barcode_success);
+        barcodeValue.setText(barcode);
 
     }
 
@@ -72,39 +61,8 @@ public class ResponseActivity extends AppCompatActivity implements View.OnClickL
      */
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.read_barcode) {
-            // launch barcode activity.
-            Intent intent = new Intent(this, BarcodeCaptureActivity.class);
-            intent.putExtra(BarcodeCaptureActivity.AutoFocus, autoFocus.isChecked());
-            intent.putExtra(BarcodeCaptureActivity.UseFlash, useFlash.isChecked());
-
-            startActivityForResult(intent, RC_BARCODE_CAPTURE);
-        }
 
     }
-
-    /**
-     * Called when an activity you launched exits, giving you the requestCode
-     * you started it with, the resultCode it returned, and any additional
-     * data from it.  The <var>resultCode</var> will be
-     * {@link #RESULT_CANCELED} if the activity explicitly returned that,
-     * didn't return any result, or crashed during its operation.
-     * <p/>
-     * <p>You will receive this call immediately before onResume() when your
-     * activity is re-starting.
-     * <p/>
-     *
-     * @param requestCode The integer request code originally supplied to
-     *                    startActivityForResult(), allowing you to identify who this
-     *                    result came from.
-     * @param resultCode  The integer result code returned by the child activity
-     *                    through its setResult().
-     * @param data        An Intent, which can return result data to the caller
-     *                    (various data can be attached to Intent "extras").
-     * @see #startActivityForResult
-     * @see #createPendingResult
-     * @see #setResult(int)
-     */
 
 
 //    @Override
