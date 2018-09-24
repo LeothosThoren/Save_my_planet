@@ -286,6 +286,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity implements B
             Intent i = new Intent(this, ResponseActivity.class);
             i.putExtra(BarcodeObject, barcode.displayValue);
             startActivity(i);
+            finish();
         }
     }
 

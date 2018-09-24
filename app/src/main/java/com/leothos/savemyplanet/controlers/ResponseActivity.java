@@ -19,10 +19,15 @@ package com.leothos.savemyplanet.controlers;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.leothos.savemyplanet.R;
+import com.leothos.savemyplanet.api.StreamApi;
+import com.leothos.savemyplanet.models.OpenFoodFact;
+
+import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableObserver;
 
 import static com.leothos.savemyplanet.controlers.BarcodeCaptureActivity.BarcodeObject;
 
@@ -30,38 +35,62 @@ import static com.leothos.savemyplanet.controlers.BarcodeCaptureActivity.Barcode
  * Main activity demonstrating how to pass extra parameters to an activity that
  * reads barcodes.
  */
-public class ResponseActivity extends AppCompatActivity implements View.OnClickListener {
+public class ResponseActivity extends AppCompatActivity {
 
     private static final int RC_BARCODE_CAPTURE = 9001;
     private static final String TAG = ResponseActivity.class.getSimpleName();
     // use a compound button so either checkbox or switch widgets work.
-    private TextView statusMessage;
-    private TextView barcodeValue;
+    private Disposable mDisposable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_response);
 
-        statusMessage = findViewById(R.id.status_message);
-        barcodeValue = findViewById(R.id.barcode_value);
-
         String barcode = getIntent().getStringExtra(BarcodeObject);
-        Log.d(TAG, "onCreate: barcode = "+barcode);
+        Log.d(TAG, "onCreate: barcode = " + barcode);
 
-        statusMessage.setText(R.string.barcode_success);
-        barcodeValue.setText(barcode);
+        this.executeHttpRequest(barcode);
 
     }
 
-    /**
-     * Called when a view has been clicked.
-     *
-     * @param v The view that was clicked.
-     */
-    @Override
-    public void onClick(View v) {
+    // -------------
+    // Rx Java
+    // -------------
 
+    private void executeHttpRequest(String barcode) {
+        this.mDisposable = StreamApi.streamFetchOpenFoodFactApi(barcode)
+                .subscribeWith(new DisposableObserver<OpenFoodFact>() {
+                    @Override
+                    public void onNext(OpenFoodFact openFoodFact) {
+                        Log.d(TAG, "onNext: " + openFoodFact.getStatusVerbose());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "onError: " + e.getMessage());
+                        Toast.makeText(ResponseActivity.this, "Pas trouvé!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d(TAG, "onComplete: do some actions");
+                    }
+                });
+    }
+
+    // Dispose subscription
+    private void disposeWhenDestroy() {
+        if (this.mDisposable != null && !this.mDisposable.isDisposed())
+            this.mDisposable.dispose();
+    }
+
+
+    //Called for better performances
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        this.disposeWhenDestroy();
     }
 
 

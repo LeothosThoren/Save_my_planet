@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
-public interface Service {
+public interface ServiceApi {
 
     String baseUri = "https://ssl-api.openfoodfacts.org/api/v0/";
 
