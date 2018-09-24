@@ -16,14 +16,24 @@
 
 package com.leothos.savemyplanet.controlers;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.databinding.DataBindingUtil;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.TextView;
+import android.view.View;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.leothos.savemyplanet.R;
 import com.leothos.savemyplanet.api.StreamApi;
+import com.leothos.savemyplanet.databinding.ActivityResponseBinding;
 import com.leothos.savemyplanet.models.OpenFoodFact;
 
 import io.reactivex.disposables.Disposable;
@@ -39,13 +49,16 @@ public class ResponseActivity extends AppCompatActivity {
 
     private static final int RC_BARCODE_CAPTURE = 9001;
     private static final String TAG = ResponseActivity.class.getSimpleName();
-    // use a compound button so either checkbox or switch widgets work.
+    //DataBinding
+    private ActivityResponseBinding mBinding;
+    //Var
+    private OpenFoodFact mOpenFoodFact = new OpenFoodFact();
     private Disposable mDisposable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_response);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_response);
 
         String barcode = getIntent().getStringExtra(BarcodeObject);
         Log.d(TAG, "onCreate: barcode = " + barcode);
@@ -54,16 +67,21 @@ public class ResponseActivity extends AppCompatActivity {
 
     }
 
+
     // -------------
     // Rx Java
     // -------------
 
     private void executeHttpRequest(String barcode) {
+        //First showing progress bar when doing task in background
+//        this. updateUiOnStartHttpRequest();
         this.mDisposable = StreamApi.streamFetchOpenFoodFactApi(barcode)
                 .subscribeWith(new DisposableObserver<OpenFoodFact>() {
                     @Override
                     public void onNext(OpenFoodFact openFoodFact) {
                         Log.d(TAG, "onNext: " + openFoodFact.getStatusVerbose());
+                        mOpenFoodFact = openFoodFact;
+                        mBinding.setOpenFoodFact(mOpenFoodFact);
                     }
 
                     @Override
@@ -75,6 +93,8 @@ public class ResponseActivity extends AppCompatActivity {
                     @Override
                     public void onComplete() {
                         Log.d(TAG, "onComplete: do some actions");
+//                        updateUiOnStopHttpRequest();
+
                     }
                 });
     }
@@ -92,6 +112,19 @@ public class ResponseActivity extends AppCompatActivity {
         super.onDestroy();
         this.disposeWhenDestroy();
     }
+
+
+    // -------------
+    // UI
+    // -------------
+//
+//    private void updateUiOnStartHttpRequest() {
+//        mBinding.activityMainProgressBar.setVisibility(View.VISIBLE);
+//    }
+//
+//    private void updateUiOnStopHttpRequest() {
+//        mBinding.activityMainProgressBar.setVisibility(View.GONE);
+//    }
 
 
 //    @Override

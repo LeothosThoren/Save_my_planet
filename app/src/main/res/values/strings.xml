@@ -15,4 +15,11 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="environment">Environment</string>
+    <string name="no_palm_oil">No palm oil</string>
+    <string name="contain_palm_oil">Contain palm oil!</string>
+    <string name="may_contain_palm_oil">May contain palm oil</string>
+    <string name="nutri_score">Nutri-Score:</string>
+    <string name="health">Health</string>
+    <string name="ingredients">Ingredients</string>
 </resources>
