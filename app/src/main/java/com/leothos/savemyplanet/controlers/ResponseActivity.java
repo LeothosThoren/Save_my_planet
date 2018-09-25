@@ -18,8 +18,11 @@ package com.leothos.savemyplanet.controlers;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.leothos.savemyplanet.R;
@@ -50,15 +53,51 @@ public class ResponseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_response);
+        this.configureToolBar();
 
         String barcode = getIntent().getStringExtra(BarcodeObject);
         Log.d(TAG, "onCreate: barcode = " + barcode);
 
         if (barcode != null)
             this.executeHttpRequest(barcode);
+        else
+            this.executeHttpRequest("8410076421449");
 
     }
 
+
+    // -------------
+    // Configuration
+    // -------------
+
+    private void configureToolBar() {
+        setSupportActionBar(mBinding.toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.menu_save:
+                Toast.makeText(this, "Save", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.menu_share:
+                Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     // -------------
     // Rx Java

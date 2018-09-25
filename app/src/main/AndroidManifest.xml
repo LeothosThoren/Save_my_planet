@@ -30,7 +30,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controlers.ResponseActivity" />
+        <activity android:name=".controlers.ResponseActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".controlers.MainActivity" />
+        </activity>
         <activity
             android:name=".controlers.BarcodeCaptureActivity"
             android:label="Read Barcode"

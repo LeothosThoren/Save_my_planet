@@ -22,4 +22,6 @@
     <string name="nutri_score">Nutri-Score:</string>
     <string name="health">Health</string>
     <string name="ingredients">Ingredients</string>
+    <string name="save">save</string>
+    <string name="share">share</string>
 </resources>
