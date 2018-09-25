@@ -16,21 +16,12 @@
 
 package com.leothos.savemyplanet.controlers;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.databinding.DataBindingUtil;
-import android.graphics.Point;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.leothos.savemyplanet.R;
 import com.leothos.savemyplanet.api.StreamApi;
 import com.leothos.savemyplanet.databinding.ActivityResponseBinding;
