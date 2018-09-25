@@ -54,7 +54,8 @@ public class ResponseActivity extends AppCompatActivity {
         String barcode = getIntent().getStringExtra(BarcodeObject);
         Log.d(TAG, "onCreate: barcode = " + barcode);
 
-        this.executeHttpRequest(barcode);
+        if (barcode != null)
+            this.executeHttpRequest(barcode);
 
     }
 
@@ -78,6 +79,7 @@ public class ResponseActivity extends AppCompatActivity {
                     @Override
                     public void onError(Throwable e) {
                         Log.e(TAG, "onError: " + e.getMessage());
+                        Log.e(TAG, "onError: ", e);
                         Toast.makeText(ResponseActivity.this, "Pas trouvé!", Toast.LENGTH_SHORT).show();
                     }
 

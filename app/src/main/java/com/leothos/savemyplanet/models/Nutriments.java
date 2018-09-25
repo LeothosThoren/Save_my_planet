@@ -8,16 +8,16 @@ public class Nutriments {
 
     @SerializedName("sugars_serving")
     @Expose
-    private Double sugarsServing;
+    private String sugarsServing;
     @SerializedName("carbohydrates")
     @Expose
     private String carbohydrates;
     @SerializedName("salt_100g")
     @Expose
-    private Double salt100g;
+    private String salt100g;
     @SerializedName("fat_100g")
     @Expose
-    private Double fat100g;
+    private String fat100g;
     @SerializedName("carbohydrates_100g")
     @Expose
     private String carbohydrates100g;
@@ -29,13 +29,13 @@ public class Nutriments {
     private String proteinsUnit;
     @SerializedName("salt")
     @Expose
-    private Double salt;
+    private String salt;
     @SerializedName("sugars_100g")
     @Expose
-    private Double sugars100g;
+    private String sugars100g;
     @SerializedName("sugars")
     @Expose
-    private Double sugars;
+    private String sugars;
     @SerializedName("energy_serving")
     @Expose
     private String energyServing;
@@ -56,7 +56,7 @@ public class Nutriments {
     private String nutritionScoreUk100g;
     @SerializedName("salt_serving")
     @Expose
-    private Double saltServing;
+    private String saltServing;
     @SerializedName("saturated-fat_unit")
     @Expose
     private String saturatedFatUnit;
@@ -71,13 +71,13 @@ public class Nutriments {
     private String proteins;
     @SerializedName("proteins_100g")
     @Expose
-    private Double proteins100g;
+    private String proteins100g;
     @SerializedName("carbohydrates_serving")
     @Expose
     private String carbohydratesServing;
     @SerializedName("saturated-fat")
     @Expose
-    private Double saturatedFat;
+    private String saturatedFat;
     @SerializedName("energy_unit")
     @Expose
     private String energyUnit;
@@ -104,16 +104,16 @@ public class Nutriments {
     private String energyValue;
     @SerializedName("sodium_100g")
     @Expose
-    private Double sodium100g;
+    private String sodium100g;
     @SerializedName("nutrition-score-uk")
     @Expose
     private String nutritionScoreUk;
     @SerializedName("sodium")
     @Expose
-    private Double sodium;
+    private String sodium;
     @SerializedName("saturated-fat_100g")
     @Expose
-    private Double saturatedFat100g;
+    private String saturatedFat100g;
     @SerializedName("nutrition-score-fr_100g")
     @Expose
     private String nutritionScoreFr100g;
@@ -125,10 +125,10 @@ public class Nutriments {
     private String carbohydratesUnit;
     @SerializedName("saturated-fat_serving")
     @Expose
-    private Double saturatedFatServing;
+    private String saturatedFatServing;
     @SerializedName("sodium_serving")
     @Expose
-    private Double sodiumServing;
+    private String sodiumServing;
     @SerializedName("proteins_value")
     @Expose
     private String proteinsValue;
@@ -139,11 +139,11 @@ public class Nutriments {
     @Expose
     private String sodiumUnit;
 
-    public Double getSugarsServing() {
+    public String getSugarsServing() {
         return sugarsServing;
     }
 
-    public void setSugarsServing(Double sugarsServing) {
+    public void setSugarsServing(String sugarsServing) {
         this.sugarsServing = sugarsServing;
     }
 
@@ -155,19 +155,19 @@ public class Nutriments {
         this.carbohydrates = carbohydrates;
     }
 
-    public Double getSalt100g() {
+    public String getSalt100g() {
         return salt100g;
     }
 
-    public void setSalt100g(Double salt100g) {
+    public void setSalt100g(String salt100g) {
         this.salt100g = salt100g;
     }
 
-    public Double getFat100g() {
+    public String getFat100g() {
         return fat100g;
     }
 
-    public void setFat100g(Double fat100g) {
+    public void setFat100g(String fat100g) {
         this.fat100g = fat100g;
     }
 
@@ -195,27 +195,27 @@ public class Nutriments {
         this.proteinsUnit = proteinsUnit;
     }
 
-    public Double getSalt() {
+    public String getSalt() {
         return salt;
     }
 
-    public void setSalt(Double salt) {
+    public void setSalt(String salt) {
         this.salt = salt;
     }
 
-    public Double getSugars100g() {
+    public String getSugars100g() {
         return sugars100g;
     }
 
-    public void setSugars100g(Double sugars100g) {
+    public void setSugars100g(String sugars100g) {
         this.sugars100g = sugars100g;
     }
 
-    public Double getSugars() {
+    public String getSugars() {
         return sugars;
     }
 
-    public void setSugars(Double sugars) {
+    public void setSugars(String sugars) {
         this.sugars = sugars;
     }
 
@@ -267,11 +267,11 @@ public class Nutriments {
         this.nutritionScoreUk100g = nutritionScoreUk100g;
     }
 
-    public Double getSaltServing() {
+    public String getSaltServing() {
         return saltServing;
     }
 
-    public void setSaltServing(Double saltServing) {
+    public void setSaltServing(String saltServing) {
         this.saltServing = saltServing;
     }
 
@@ -307,11 +307,11 @@ public class Nutriments {
         this.proteins = proteins;
     }
 
-    public Double getProteins100g() {
+    public String getProteins100g() {
         return proteins100g;
     }
 
-    public void setProteins100g(Double proteins100g) {
+    public void setProteins100g(String proteins100g) {
         this.proteins100g = proteins100g;
     }
 
@@ -323,11 +323,11 @@ public class Nutriments {
         this.carbohydratesServing = carbohydratesServing;
     }
 
-    public Double getSaturatedFat() {
+    public String getSaturatedFat() {
         return saturatedFat;
     }
 
-    public void setSaturatedFat(Double saturatedFat) {
+    public void setSaturatedFat(String saturatedFat) {
         this.saturatedFat = saturatedFat;
     }
 
@@ -395,11 +395,11 @@ public class Nutriments {
         this.energyValue = energyValue;
     }
 
-    public Double getSodium100g() {
+    public String getSodium100g() {
         return sodium100g;
     }
 
-    public void setSodium100g(Double sodium100g) {
+    public void setSodium100g(String sodium100g) {
         this.sodium100g = sodium100g;
     }
 
@@ -411,19 +411,19 @@ public class Nutriments {
         this.nutritionScoreUk = nutritionScoreUk;
     }
 
-    public Double getSodium() {
+    public String getSodium() {
         return sodium;
     }
 
-    public void setSodium(Double sodium) {
+    public void setSodium(String sodium) {
         this.sodium = sodium;
     }
 
-    public Double getSaturatedFat100g() {
+    public String getSaturatedFat100g() {
         return saturatedFat100g;
     }
 
-    public void setSaturatedFat100g(Double saturatedFat100g) {
+    public void setSaturatedFat100g(String saturatedFat100g) {
         this.saturatedFat100g = saturatedFat100g;
     }
 
@@ -451,19 +451,19 @@ public class Nutriments {
         this.carbohydratesUnit = carbohydratesUnit;
     }
 
-    public Double getSaturatedFatServing() {
+    public String getSaturatedFatServing() {
         return saturatedFatServing;
     }
 
-    public void setSaturatedFatServing(Double saturatedFatServing) {
+    public void setSaturatedFatServing(String saturatedFatServing) {
         this.saturatedFatServing = saturatedFatServing;
     }
 
-    public Double getSodiumServing() {
+    public String getSodiumServing() {
         return sodiumServing;
     }
 
-    public void setSodiumServing(Double sodiumServing) {
+    public void setSodiumServing(String sodiumServing) {
         this.sodiumServing = sodiumServing;
     }
 

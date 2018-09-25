@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_dashboard);
+                    startActivity(ResponseActivity.class);
                     return true;
                 case R.id.navigation_notifications:
                     mTextMessage.setText(R.string.title_notifications);
@@ -45,11 +46,11 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         actionButton = findViewById(R.id.fab);
-        actionButton.setOnClickListener(v->startActivity());
+        actionButton.setOnClickListener(v -> startActivity(BarcodeCaptureActivity.class));
     }
 
-    private void startActivity() {
-        Intent i = new Intent(this, BarcodeCaptureActivity.class);
+    private void startActivity(Class activity) {
+        Intent i = new Intent(this, activity);
         startActivity(i);
     }
 

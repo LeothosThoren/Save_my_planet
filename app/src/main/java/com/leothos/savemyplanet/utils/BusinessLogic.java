@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class BusinessLogic {
 
-    public static String getStatusText(Integer number, String ok, String warning, String bad) {
+    public static String getStatusText(int number, String ok, String warning, String bad) {
         if (number == 0) {
             return ok;
         } else if (number == 1) {
@@ -18,7 +18,7 @@ public class BusinessLogic {
     }
 
 
-    public static Drawable getStatusDrawable(Integer number, Drawable ok, Drawable warning, Drawable bad) {
+    public static Drawable getStatusDrawable(int number, Drawable ok, Drawable warning, Drawable bad) {
         if (number == 0) {
             return ok;
         } else if (number == 1) {

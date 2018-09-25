@@ -12,7 +12,7 @@ import retrofit2.http.Path;
 
 public interface ServiceApi {
 
-    String baseUri = "https://ssl-api.openfoodfacts.org/api/v0/";
+    String baseUri = "https://ssl-api.openfoodfacts.org/api/v0/product/";
 
     Retrofit RETROFIT = new Retrofit.Builder()
             .baseUrl(baseUri)
@@ -21,6 +21,6 @@ public interface ServiceApi {
             .build();
 
     //OpenFoodFact api
-    @GET("product/{barcode}.json")
+    @GET("{barcode}.json")
     Observable<OpenFoodFact> getProduct(@Path("barcode") String barcode);
 }

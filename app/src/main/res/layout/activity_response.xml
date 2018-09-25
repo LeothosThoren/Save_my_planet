@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout>
 
     <data>
 
@@ -13,7 +13,7 @@
             type="com.leothos.savemyplanet.models.OpenFoodFact" />
     </data>
 
-    <ScrollView
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -44,7 +44,7 @@
                         android:id="@+id/product_picture"
                         android:layout_width="95dp"
                         android:layout_height="95dp"
-                        app:imageUrl="@{openFoodFact.getProduct.getImageFrontUrl}"
+                        app:imageUrl="@{openFoodFact.getProduct.getImageFrontThumbUrl}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -54,8 +54,8 @@
                         android:id="@+id/product_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:maxLines="2"
                         android:text="@{openFoodFact.getProduct.getProductName}"
@@ -67,8 +67,8 @@
                         android:id="@+id/product_brand"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:text="@{openFoodFact.getProduct.getBrands}"
                         android:textStyle="italic"
@@ -78,10 +78,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="8dp"
                         android:text="@{openFoodFact.getProduct.getQuantity}"
+                        android:textSize="13sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/product_picture"
                         app:layout_constraintTop_toBottomOf="@+id/product_brand" />
 
@@ -124,7 +126,7 @@
                         android:text="@{BusinessLogic.getStatusText(openFoodFact.getProduct.getIngredientsFromPalmOilN, @string/no_palm_oil, @string/may_contain_palm_oil, @string/contain_palm_oil)}"
                         android:textColor="@color/colorBlack"
                         android:textSize="18sp"
-                        android:textStyle="bold|italic"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -134,8 +136,8 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginBottom="20dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginRight="16dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"
                         android:layout_marginTop="20dp"
                         android:src="@{BusinessLogic.getStatusDrawable(openFoodFact.getProduct.getIngredientsFromPalmOilN, @drawable/ic_green_alert, @drawable/ic_warning_alert, @drawable/ic_red_alert)}"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -223,25 +225,20 @@
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:padding="5dp"
+                    android:layout_margin="5dp">
 
                     <TextView
                         android:id="@+id/ingredient_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
                         android:text="@{openFoodFact.getProduct.getIngredientsTextFr}"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </android.support.constraint.ConstraintLayout>
             </android.support.v7.widget.CardView>
