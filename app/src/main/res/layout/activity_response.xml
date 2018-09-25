@@ -22,13 +22,13 @@
         tools:context=".controlers.activities.ResponseActivity">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/t"
+            android:id="@+id/toolbarL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorAccent"
-            app:layout_scrollFlags="scroll|enterAlways"
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/ToolbarTheme"
+            app:layout_scrollFlags="scroll|enterAlways"
             app:titleTextAppearance="@style/Toolbar.TitleText"
             app:titleTextColor="@color/colorWhite" />
 

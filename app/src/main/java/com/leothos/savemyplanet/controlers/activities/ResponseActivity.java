@@ -71,7 +71,7 @@ public class ResponseActivity extends AppCompatActivity {
     // -------------
 
     private void configureToolBar() {
-        setSupportActionBar(this.mBinding.t);
+        setSupportActionBar(mBinding.toolbarL);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);

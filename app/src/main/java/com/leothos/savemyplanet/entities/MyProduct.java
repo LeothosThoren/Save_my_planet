@@ -10,8 +10,8 @@ import java.util.Date;
 public class MyProduct {
 
     @PrimaryKey
-    private @NonNull
-    String codeId;
+    @NonNull
+    private String codeId;
     private String productName;
     private String productBrand;
     private String category;
