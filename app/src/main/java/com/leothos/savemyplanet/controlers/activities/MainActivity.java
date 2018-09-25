@@ -1,4 +1,4 @@
-package com.leothos.savemyplanet.controlers;
+package com.leothos.savemyplanet.controlers.activities;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -22,7 +22,7 @@
             android:value="barcode" />
 
         <activity
-            android:name=".controlers.MainActivity"
+            android:name=".controlers.activities.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -30,13 +30,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controlers.ResponseActivity">
+        <activity android:name=".controlers.activities.ResponseActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".controlers.MainActivity" />
+                android:value=".controlers.activities.MainActivity" />
         </activity>
         <activity
-            android:name=".controlers.BarcodeCaptureActivity"
+            android:name=".controlers.activities.BarcodeCaptureActivity"
             android:label="Read Barcode"
             android:theme="@style/AppTheme" />
 

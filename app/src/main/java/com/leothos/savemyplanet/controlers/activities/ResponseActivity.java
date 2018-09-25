@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.leothos.savemyplanet.controlers;
+package com.leothos.savemyplanet.controlers.activities;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -33,7 +33,7 @@ import com.leothos.savemyplanet.models.OpenFoodFact;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 
-import static com.leothos.savemyplanet.controlers.BarcodeCaptureActivity.BarcodeObject;
+import static com.leothos.savemyplanet.controlers.activities.BarcodeCaptureActivity.BarcodeObject;
 
 /**
  * Main activity demonstrating how to pass extra parameters to an activity that
@@ -71,7 +71,7 @@ public class ResponseActivity extends AppCompatActivity {
     // -------------
 
     private void configureToolBar() {
-        setSupportActionBar(mBinding.toolbar);
+        setSupportActionBar(this.mBinding.t);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
