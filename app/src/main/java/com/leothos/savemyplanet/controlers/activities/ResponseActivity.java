@@ -23,6 +23,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.leothos.savemyplanet.R;
@@ -105,7 +106,7 @@ public class ResponseActivity extends AppCompatActivity {
 
     private void executeHttpRequest(String barcode) {
         //First showing progress bar when doing task in background
-//        this. updateUiOnStartHttpRequest();
+        this.updateUiOnStartHttpRequest();
         this.mDisposable = StreamApi.streamFetchOpenFoodFactApi(barcode)
                 .subscribeWith(new DisposableObserver<OpenFoodFact>() {
                     @Override
@@ -125,7 +126,7 @@ public class ResponseActivity extends AppCompatActivity {
                     @Override
                     public void onComplete() {
                         Log.d(TAG, "onComplete: do some actions");
-//                        updateUiOnStopHttpRequest();
+                        updateUiOnStopHttpRequest();
 
                     }
                 });
@@ -149,14 +150,17 @@ public class ResponseActivity extends AppCompatActivity {
     // -------------
     // UI
     // -------------
-//
-//    private void updateUiOnStartHttpRequest() {
-//        mBinding.activityMainProgressBar.setVisibility(View.VISIBLE);
-//    }
-//
-//    private void updateUiOnStopHttpRequest() {
-//        mBinding.activityMainProgressBar.setVisibility(View.GONE);
-//    }
+
+    private void updateUiOnStartHttpRequest() {
+        mBinding.cardviewLayout.setVisibility(View.VISIBLE);
+        mBinding.scrollView.setVisibility(View.GONE);
+    }
+
+    private void updateUiOnStopHttpRequest() {
+        mBinding.cardviewLayout.setVisibility(View.GONE);
+        mBinding.scrollView.setVisibility(View.VISIBLE);
+
+    }
 
 
 //    @Override
