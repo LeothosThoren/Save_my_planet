@@ -16,10 +16,12 @@
 
 package com.leothos.savemyplanet.controlers.activities;
 
+import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -30,6 +32,7 @@ import android.widget.Toast;
 
 import com.leothos.savemyplanet.R;
 import com.leothos.savemyplanet.api.StreamApi;
+import com.leothos.savemyplanet.controlers.fragments.DisplayImageBigSize;
 import com.leothos.savemyplanet.databinding.ActivityResponseBinding;
 import com.leothos.savemyplanet.models.OpenFoodFact;
 import com.leothos.savemyplanet.utils.AddNewProduct;
@@ -45,6 +48,8 @@ import static com.leothos.savemyplanet.controlers.activities.BarcodeCaptureActiv
  */
 public class ResponseActivity extends AppCompatActivity {
 
+    public static final String CUSTOM_DIALOG_IMAGE = "CUSTOM_DIALOG_IMAGE";
+    public static final String BUNDLE_KEY = "BUNDLE_KEY";
     private static final int RC_BARCODE_CAPTURE = 9001;
     private static final String TAG = ResponseActivity.class.getSimpleName();
     // DataBinding
@@ -132,7 +137,6 @@ public class ResponseActivity extends AppCompatActivity {
                     public void onComplete() {
                         Log.d(TAG, "onComplete: do some actions");
                         updateUiOnStopHttpRequest(status);
-
                     }
                 });
     }
@@ -151,6 +155,19 @@ public class ResponseActivity extends AppCompatActivity {
         this.disposeWhenDestroy();
     }
 
+    // -------------
+    // Action
+    // -------------
+
+    private void openCustomDialog() {
+        DisplayImageBigSize imageBigSize = new DisplayImageBigSize();
+        Bundle args = new Bundle();
+        args.putString(BUNDLE_KEY, mOpenFoodFact.getProduct().getImageFrontUrl());
+        imageBigSize.setArguments(args);
+        imageBigSize.setStyle(DialogFragment.STYLE_NO_TITLE, DialogFragment.STYLE_NO_INPUT);
+        imageBigSize.show(getSupportFragmentManager(), CUSTOM_DIALOG_IMAGE);
+
+    }
 
     // -------------
     // UI
@@ -164,6 +181,7 @@ public class ResponseActivity extends AppCompatActivity {
     private void updateUiOnStopHttpRequest(int status) {
         if (status == 0) {
             mBinding.progressBar.setVisibility(View.GONE);
+            mBinding.noFoundImage.setVisibility(View.VISIBLE);
             Snackbar.make(findViewById(R.id.coordinator), R.string.product_no_found, Snackbar.LENGTH_INDEFINITE)
                     .setAction("ADD", new AddNewProduct(this))
                     .setActionTextColor(Color.RED)
@@ -171,6 +189,7 @@ public class ResponseActivity extends AppCompatActivity {
         } else {
             mBinding.cardviewLayout.setVisibility(View.GONE);
             mBinding.scrollView.setVisibility(View.VISIBLE);
+            mBinding.productPicture.setOnClickListener(v->this.openCustomDialog());
         }
 
     }
