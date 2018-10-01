@@ -16,7 +16,7 @@
 
 package com.leothos.savemyplanet.controlers.activities;
 
-import android.content.res.Resources;
+import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -31,11 +31,17 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.leothos.savemyplanet.R;
+import com.leothos.savemyplanet.ViewModel.ProductViewModel;
 import com.leothos.savemyplanet.api.StreamApi;
 import com.leothos.savemyplanet.controlers.fragments.DisplayImageBigSize;
 import com.leothos.savemyplanet.databinding.ActivityResponseBinding;
+import com.leothos.savemyplanet.entities.MyProduct;
+import com.leothos.savemyplanet.injections.Injection;
+import com.leothos.savemyplanet.injections.ViewModelFactory;
 import com.leothos.savemyplanet.models.OpenFoodFact;
 import com.leothos.savemyplanet.utils.AddNewProduct;
+
+import java.util.Calendar;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
@@ -48,15 +54,17 @@ import static com.leothos.savemyplanet.controlers.activities.BarcodeCaptureActiv
  */
 public class ResponseActivity extends AppCompatActivity {
 
+    // Constant
     public static final String CUSTOM_DIALOG_IMAGE = "CUSTOM_DIALOG_IMAGE";
     public static final String BUNDLE_KEY = "BUNDLE_KEY";
-    private static final int RC_BARCODE_CAPTURE = 9001;
+    //    private static final int RC_BARCODE_CAPTURE = 9001;
     private static final String TAG = ResponseActivity.class.getSimpleName();
     // DataBinding
     private ActivityResponseBinding mBinding;
     // Var
     private OpenFoodFact mOpenFoodFact = new OpenFoodFact();
     private Disposable mDisposable;
+    private ProductViewModel mProductViewModel;
     // Data
     private int status = -1;
 
@@ -64,16 +72,20 @@ public class ResponseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_response);
-        this.configureToolBar();
 
+        this.init();
+    }
+
+    private void init() {
+        this.configureToolBar();
+        this.configureViewModel();
+        // Temporary...
         String barcode = getIntent().getStringExtra(BarcodeObject);
         Log.d(TAG, "onCreate: barcode = " + barcode);
-
         if (barcode != null)
             this.executeHttpRequest(barcode);
         else
             this.executeHttpRequest("8410076421449");
-
     }
 
 
@@ -108,6 +120,11 @@ public class ResponseActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void configureViewModel() {
+        ViewModelFactory modelFactory = Injection.provideViewModelFactory(this);
+        this.mProductViewModel = ViewModelProviders.of(this, modelFactory).get(ProductViewModel.class);
     }
 
     // -------------
@@ -182,18 +199,35 @@ public class ResponseActivity extends AppCompatActivity {
         if (status == 0) {
             mBinding.progressBar.setVisibility(View.GONE);
             mBinding.noFoundImage.setVisibility(View.VISIBLE);
-            Snackbar.make(findViewById(R.id.coordinator), R.string.product_no_found, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(findViewById(R.id.coordinator), R.string.product_no_found,
+                    Snackbar.LENGTH_INDEFINITE)
                     .setAction("ADD", new AddNewProduct(this))
-                    .setActionTextColor(Color.RED)
+                    .setActionTextColor(Color.GREEN)
                     .show();
         } else {
             mBinding.cardviewLayout.setVisibility(View.GONE);
             mBinding.scrollView.setVisibility(View.VISIBLE);
-            mBinding.productPicture.setOnClickListener(v->this.openCustomDialog());
+            mBinding.productPicture.setOnClickListener(v -> this.openCustomDialog());
+            this.saveProduct();
         }
 
     }
 
+    private void saveProduct() {
+        MyProduct products = new MyProduct(
+                mOpenFoodFact.getProduct().getProductName(),
+                mOpenFoodFact.getProduct().getBrands(),
+                mOpenFoodFact.getProduct().getCategories(),
+                mOpenFoodFact.getProduct().getImageFrontUrl(),
+                mOpenFoodFact.getProduct().getQuantity(),
+                mOpenFoodFact.getProduct().getIngredientsFromPalmOilN(),
+                mOpenFoodFact.getProduct().getNutritionGrades(),
+                Calendar.getInstance().getTime(),
+                mOpenFoodFact.getCode());
+
+        mProductViewModel.insertProduct(products);
+        Toast.makeText(this, "Product saved!", Toast.LENGTH_SHORT).show();
+    }
 
 //    @Override
 //    protected void onActivityResult(int requestCode, int resultCode, Intent data) {

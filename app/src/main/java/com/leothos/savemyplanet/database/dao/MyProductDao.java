@@ -14,7 +14,7 @@ import java.util.List;
 @Dao
 public interface MyProductDao {
 
-    @Query("SELECT * FROM MyProduct ORDER BY timestamp ASC")
+    @Query("SELECT * FROM MyProduct ORDER BY timestamp DESC")
     LiveData<List<MyProduct>> getAllProducts();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

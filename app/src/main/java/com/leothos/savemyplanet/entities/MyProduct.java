@@ -10,8 +10,7 @@ import java.util.Date;
 public class MyProduct {
 
     @PrimaryKey
-    @NonNull
-    private String codeId;
+    @NonNull private String codeId;
     private String productName;
     private String productBrand;
     private String category;
@@ -25,7 +24,7 @@ public class MyProduct {
     }
 
     public MyProduct(String productName, String productBrand, String category, String urlPicture,
-                     String quantity, Integer palmOilIndicator, String scoreGrade, Date timestamp, String codeId) {
+                     String quantity, Integer palmOilIndicator, String scoreGrade, Date timestamp, @NonNull String codeId) {
         this.codeId = codeId;
         this.productName = productName;
         this.productBrand = productBrand;
