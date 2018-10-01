@@ -25,6 +25,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
@@ -49,8 +50,12 @@ import com.leothos.savemyplanet.ui.barcodegraphic.BarcodeTrackerFactory;
 import com.leothos.savemyplanet.ui.camera.CameraSource;
 import com.leothos.savemyplanet.ui.camera.CameraSourcePreview;
 import com.leothos.savemyplanet.ui.camera.GraphicOverlay;
+import com.leothos.savemyplanet.utils.AddNewProduct;
 
 import java.io.IOException;
+
+import static com.google.android.gms.vision.barcode.Barcode.EAN_13;
+import static com.google.android.gms.vision.barcode.Barcode.EAN_8;
 
 
 /**
@@ -282,12 +287,16 @@ public final class BarcodeCaptureActivity extends AppCompatActivity implements B
     public void onBarcodeDetected(Barcode barcode) {
         //do something with barcode data returned
         Log.d(TAG, "onBarcodeDetected: " + barcode.displayValue);
-        if (barcode.displayValue != null) {
+        if (barcode.displayValue != null && (barcode.format == EAN_13 || barcode.format == EAN_8)) {
             Intent i = new Intent(this, ResponseActivity.class);
             i.putExtra(BarcodeObject, barcode.displayValue);
             startActivity(i);
-            finish();
+        } else {
+            Snackbar.make(findViewById(R.id.topLayout), R.string.barcode_no_found, Snackbar.LENGTH_LONG)
+                    .setActionTextColor(Color.RED)
+                    .show();
         }
+        finish();
     }
 
 }

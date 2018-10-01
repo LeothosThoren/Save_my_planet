@@ -17,7 +17,9 @@
 package com.leothos.savemyplanet.controlers.activities;
 
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -30,6 +32,7 @@ import com.leothos.savemyplanet.R;
 import com.leothos.savemyplanet.api.StreamApi;
 import com.leothos.savemyplanet.databinding.ActivityResponseBinding;
 import com.leothos.savemyplanet.models.OpenFoodFact;
+import com.leothos.savemyplanet.utils.AddNewProduct;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
@@ -44,11 +47,13 @@ public class ResponseActivity extends AppCompatActivity {
 
     private static final int RC_BARCODE_CAPTURE = 9001;
     private static final String TAG = ResponseActivity.class.getSimpleName();
-    //DataBinding
+    // DataBinding
     private ActivityResponseBinding mBinding;
-    //Var
+    // Var
     private OpenFoodFact mOpenFoodFact = new OpenFoodFact();
     private Disposable mDisposable;
+    // Data
+    private int status = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +77,7 @@ public class ResponseActivity extends AppCompatActivity {
     // -------------
 
     private void configureToolBar() {
-        setSupportActionBar(mBinding.toolbarL);
+        setSupportActionBar(mBinding.toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -112,6 +117,7 @@ public class ResponseActivity extends AppCompatActivity {
                     @Override
                     public void onNext(OpenFoodFact openFoodFact) {
                         Log.d(TAG, "onNext: " + openFoodFact.getStatusVerbose());
+                        status = openFoodFact.getStatus();
                         mOpenFoodFact = openFoodFact;
                         mBinding.setOpenFoodFact(mOpenFoodFact);
                     }
@@ -119,14 +125,13 @@ public class ResponseActivity extends AppCompatActivity {
                     @Override
                     public void onError(Throwable e) {
                         Log.e(TAG, "onError: " + e.getMessage());
-                        Log.e(TAG, "onError: ", e);
-                        Toast.makeText(ResponseActivity.this, "Pas trouvé!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ResponseActivity.this, "An error occurred! Please check your connectivity...", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onComplete() {
                         Log.d(TAG, "onComplete: do some actions");
-                        updateUiOnStopHttpRequest();
+                        updateUiOnStopHttpRequest(status);
 
                     }
                 });
@@ -156,9 +161,17 @@ public class ResponseActivity extends AppCompatActivity {
         mBinding.scrollView.setVisibility(View.GONE);
     }
 
-    private void updateUiOnStopHttpRequest() {
-        mBinding.cardviewLayout.setVisibility(View.GONE);
-        mBinding.scrollView.setVisibility(View.VISIBLE);
+    private void updateUiOnStopHttpRequest(int status) {
+        if (status == 0) {
+            mBinding.progressBar.setVisibility(View.GONE);
+            Snackbar.make(findViewById(R.id.coordinator), R.string.product_no_found, Snackbar.LENGTH_INDEFINITE)
+                    .setAction("ADD", new AddNewProduct(this))
+                    .setActionTextColor(Color.RED)
+                    .show();
+        } else {
+            mBinding.cardviewLayout.setVisibility(View.GONE);
+            mBinding.scrollView.setVisibility(View.VISIBLE);
+        }
 
     }
 

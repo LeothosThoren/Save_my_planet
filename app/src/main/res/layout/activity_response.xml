@@ -13,16 +13,17 @@
             type="com.leothos.savemyplanet.models.OpenFoodFact" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/coordinator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".controlers.activities.ResponseActivity">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbarL"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorAccent"
@@ -282,6 +283,6 @@
             </RelativeLayout>
         </ScrollView>
 
-    </LinearLayout>
+    </android.support.design.widget.CoordinatorLayout>
 
 </layout>

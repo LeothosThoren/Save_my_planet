@@ -24,5 +24,7 @@
     <string name="ingredients">Ingredients</string>
     <string name="save">save</string>
     <string name="share">share</string>
+    <string name="product_no_found">Product not found, would you like to add it?</string>
+    <string name="barcode_no_found">Unknown barcode</string>
 
 </resources>
