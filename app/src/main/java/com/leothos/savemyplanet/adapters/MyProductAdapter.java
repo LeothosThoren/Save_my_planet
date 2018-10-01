@@ -20,8 +20,9 @@ public class MyProductAdapter extends RecyclerView.Adapter<MyProductViewHolder> 
     private List<MyProduct> mProductList;
     private RequestManager glide;
 
-    public MyProductAdapter() {
+    public MyProductAdapter(RequestManager glide) {
         this.mProductList = new ArrayList<>();
+        this.glide = glide;
     }
 
     @NonNull
