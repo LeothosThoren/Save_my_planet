@@ -43,15 +43,15 @@ public class MyProductViewHolder extends RecyclerView.ViewHolder {
 
         switch (myProduct.getPalmOilIndicator()) {
             case 0: //No palm Oil
-                this.productQuality.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_indicator_green, 0);
+                this.productQuality.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_indicator_green, 0, 0, 0);
                 this.productQuality.setText(R.string.no_palm_oil);
                 break;
             case 1: //Contain palm oil
-                this.productQuality.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_indicator_red, 0);
+                this.productQuality.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_indicator_red, 0, 0, 0);
                 this.productQuality.setText(R.string.contain_palm_oil);
                 break;
             case 2: //May contain palm oil
-                this.productQuality.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_indicator_orange, 0);
+                this.productQuality.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_indicator_orange, 0, 0, 0);
                 this.productQuality.setText(R.string.may_contain_palm_oil);
                 break;
         }

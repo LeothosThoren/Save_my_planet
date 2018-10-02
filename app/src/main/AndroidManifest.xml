@@ -10,8 +10,8 @@
         android:allowBackup="false"
         android:fullBackupContent="false"
         android:hardwareAccelerated="true"
-        android:icon="@drawable/icon"
-        android:label="SaveMyPlanet"
+        android:icon="@drawable/ic_planet_earth"
+        android:label="Save My Planet"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data

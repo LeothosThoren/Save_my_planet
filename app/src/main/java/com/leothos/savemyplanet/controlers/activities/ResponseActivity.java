@@ -17,6 +17,7 @@
 package com.leothos.savemyplanet.controlers.activities;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -111,11 +112,9 @@ public class ResponseActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            case R.id.menu_save:
-                Toast.makeText(this, "Save", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.menu_share:
-                Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
+            case R.id.menu_scan:
+                Intent i = new Intent(this, BarcodeCaptureActivity.class);
+                startActivity(i);
                 break;
         }
 
