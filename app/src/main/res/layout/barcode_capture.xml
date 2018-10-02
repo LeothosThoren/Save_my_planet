@@ -1,40 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/topLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/transparent_foreground"
-    android:gravity="center"
-    android:keepScreenOn="true"
-    android:orientation="vertical">
+    android:keepScreenOn="true">
 
-
-    <CheckBox
-        android:id="@+id/use_flash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/round_shape"
-        android:button="@drawable/custom_checkbox"
-        android:checked="false"
-        android:onClick="onCheckboxClicked" />
-
-
-    <com.leothos.savemyplanet.ui.camera.CameraSourcePreview
-        android:id="@+id/preview"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="14dp"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.leothos.savemyplanet.ui.camera.GraphicOverlay
-            android:id="@+id/graphicOverlay"
-            android:layout_width="0dp"
-            android:layout_height="0dp" />
 
-    </com.leothos.savemyplanet.ui.camera.CameraSourcePreview>
+        <CheckBox
+            android:id="@+id/use_flash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_shape"
+            android:button="@drawable/custom_checkbox"
+            android:checked="false"
+            android:onClick="onCheckboxClicked" />
 
+        <RelativeLayout
+            android:id="@+id/camera_scan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/use_flash">
+
+            <com.leothos.savemyplanet.ui.camera.CameraSourcePreview
+                android:id="@+id/preview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.leothos.savemyplanet.ui.camera.GraphicOverlay
+                    android:id="@+id/graphicOverlay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </com.leothos.savemyplanet.ui.camera.CameraSourcePreview>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/bottom_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/camera_scan">
+
+            <android.support.design.widget.BottomNavigationView
+                android:id="@+id/navigation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="0dp"
+                android:layout_marginStart="0dp"
+                android:background="?android:attr/windowBackground"
+                app:menu="@menu/navigation" />
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>
