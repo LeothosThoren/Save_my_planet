@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -30,6 +31,8 @@ public class ProductListFragment extends Fragment {
 
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
+    @BindView(R.id.message_empty)
+    TextView mEmptyMessage;
     private ProductViewModel mProductViewModel;
     private MyProductAdapter mAdapter;
 
@@ -96,6 +99,9 @@ public class ProductListFragment extends Fragment {
     }
 
     private void updateProductList(List<MyProduct> myProducts) {
+        this.mEmptyMessage.setVisibility(myProducts.size() == 0 ? View.VISIBLE : View.GONE);
         this.mAdapter.updateData(myProducts);
     }
+
+
 }
