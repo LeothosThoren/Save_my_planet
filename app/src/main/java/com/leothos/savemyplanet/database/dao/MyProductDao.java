@@ -18,8 +18,8 @@ public interface MyProductDao {
     LiveData<List<MyProduct>> getAllProducts();
 
     @Query("SELECT * FROM MyProduct WHERE productName LIKE :productName AND category LIKE :category " +
-            "AND palmOilIndicator = :palmOilInd AND scoreGrade = :scoreGrade ORDER BY productName ASC")
-    LiveData<List<MyProduct>> searchProducts(String productName, String category, Integer palmOilInd, String scoreGrade);
+            "AND palmOilIndicator = :palmOilInd ORDER BY productName ASC")
+    LiveData<List<MyProduct>> searchProducts(String productName, String category, Integer palmOilInd);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insertProduct(MyProduct myProduct);

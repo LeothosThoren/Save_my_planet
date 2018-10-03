@@ -11,6 +11,6 @@
         android:icon="@drawable/ic_exit"
         android:title="@string/exit"
         app:showAsAction="ifRoom"
-        android:visible="true"/>
+        android:visible="false"/>
 
 </menu>

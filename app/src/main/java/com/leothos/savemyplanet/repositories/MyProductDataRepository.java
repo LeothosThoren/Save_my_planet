@@ -21,6 +21,12 @@ public class MyProductDataRepository {
         return this.myProductDao.getAllProducts();
     }
 
+    // --- SEARCH ---
+
+    public LiveData<List<MyProduct>> searchProducts(String productName, String category, Integer palmOilInd) {
+        return this.myProductDao.searchProducts(productName, category, palmOilInd);
+    }
+
     // --- CREATE ---
 
     public void insertProduct(MyProduct myProduct) {
@@ -35,7 +41,7 @@ public class MyProductDataRepository {
 
     // --- DELETE ---
 
-    public  void deleteProduct(String codeId) {
+    public void deleteProduct(String codeId) {
         myProductDao.deleteProduct(codeId);
     }
 

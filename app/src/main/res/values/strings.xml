@@ -35,7 +35,10 @@
     <string name="separation">&#160;-&#160;</string>
     <string name="quantity">quantity</string>
     <string name="quality">quality</string>
-    <string name="product_name">name</string>
+    <string name="product_name">Product name</string>
     <string name="exit">exit</string>
+    <string name="category">Category</string>
+    <string name="with_palm_oil">With palm oil</string>
+    <string name="without_palm_oil">Without palm oil</string>
 
 </resources>

@@ -1,10 +1,12 @@
 package com.leothos.savemyplanet.controlers.fragments;
 
+import android.animation.ObjectAnimator;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -14,6 +16,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnticipateOvershootInterpolator;
+import android.view.animation.TranslateAnimation;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +48,8 @@ public class ProductListFragment extends Fragment {
     TextView mEmptyMessage;
     @BindView(R.id.list_toolbar)
     Toolbar mToolbar;
+    @BindView(R.id.container)
+    CardView mCardView;
     // Var
     private ProductViewModel mProductViewModel;
     private MyProductAdapter mAdapter;
@@ -70,6 +78,7 @@ public class ProductListFragment extends Fragment {
         this.configureRecyclerView();
         this.configureViewModel();
         this.getProductList();
+
     }
 
     // -------------
@@ -91,6 +100,7 @@ public class ProductListFragment extends Fragment {
 
     private void configureToolBar() {
         ((AppCompatActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(mToolbar);
+        ((AppCompatActivity) Objects.requireNonNull(getActivity())).setTitle(getString(R.string.title_history));
     }
 
     @Override
@@ -106,13 +116,32 @@ public class ProductListFragment extends Fragment {
         switch (id) {
             case R.id.menu_search:
                 Toast.makeText(getContext(), "search", Toast.LENGTH_SHORT).show();
+                this.prepareEntryAnimation();
                 break;
             case R.id.menu_exit:
                 Toast.makeText(getContext(), "quit", Toast.LENGTH_SHORT).show();
+                this.prepareExitAnimation();
                 break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        MenuItem exit = menu.findItem(R.id.menu_exit);
+        MenuItem search = menu.findItem(R.id.menu_search);
+
+        search.setOnMenuItemClickListener(item -> {
+            exit.setVisible(true);
+            return false;
+        });
+
+        exit.setOnMenuItemClickListener(item -> {
+            exit.setVisible(false);
+            return false;
+        });
+
     }
 
     // -------------
@@ -127,6 +156,7 @@ public class ProductListFragment extends Fragment {
                 });
     }
 
+
     // -------------
     // UI
     // -------------
@@ -140,5 +170,17 @@ public class ProductListFragment extends Fragment {
         this.mAdapter.updateData(myProducts);
     }
 
+    private void prepareEntryAnimation() {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(mCardView, View.TRANSLATION_X, mCardView.getWidth(), 0);
+        animator.setDuration(600);
+        animator.setInterpolator(new AnticipateOvershootInterpolator());
+        animator.start();
+    }
 
+    private void prepareExitAnimation() {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(mCardView, View.TRANSLATION_X, 0, mCardView.getWidth());
+        animator.setDuration(600);
+        animator.setInterpolator(new AnticipateOvershootInterpolator());
+        animator.start();
+    }
 }
