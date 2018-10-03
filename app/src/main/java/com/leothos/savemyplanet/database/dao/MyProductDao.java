@@ -17,9 +17,9 @@ public interface MyProductDao {
     @Query("SELECT * FROM MyProduct ORDER BY timestamp DESC")
     LiveData<List<MyProduct>> getAllProducts();
 
-    @Query("SELECT * FROM MyProduct WHERE productName LIKE :productName AND category LIKE :category " +
-            "AND palmOilIndicator = :palmOilInd ORDER BY productName ASC")
-    LiveData<List<MyProduct>> searchProducts(String productName, String category, Integer palmOilInd);
+    @Query("SELECT * FROM MyProduct WHERE productName LIKE :productName AND productBrand LIKE :productBrand " +
+            "AND palmOilIndicator BETWEEN :palmOilIndMin AND :palmOilIndMax ORDER BY productName ASC")
+    LiveData<List<MyProduct>> searchProducts(String productName, String productBrand, Integer palmOilIndMin, Integer palmOilIndMax);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insertProduct(MyProduct myProduct);

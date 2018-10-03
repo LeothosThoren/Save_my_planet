@@ -2,24 +2,28 @@ package com.leothos.savemyplanet.controlers.fragments;
 
 import android.animation.ObjectAnimator;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.view.animation.AnticipateOvershootInterpolator;
-import android.view.animation.TranslateAnimation;
-import android.widget.RelativeLayout;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,8 +43,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class ProductListFragment extends Fragment {
+public class ProductListFragment extends Fragment implements View.OnClickListener {
 
+    // Constant
+    private static Integer INDICATOR_MIN = -1;
+    private static Integer INDICATOR_MAX = 3;
     // Widget
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
@@ -50,6 +57,20 @@ public class ProductListFragment extends Fragment {
     Toolbar mToolbar;
     @BindView(R.id.container)
     CardView mCardView;
+    @BindView(R.id.edit_text_product_name)
+    EditText mEditProductName;
+    @BindView(R.id.edit_text_product_brand)
+    EditText mEditBrand;
+    @BindView(R.id.validate_search)
+    ImageButton mValidatorSearch;
+    @BindView(R.id.button_with)
+    RadioButton mRadioWith;
+    @BindView(R.id.button_without)
+    RadioButton mRadioWithout;
+    @BindView(R.id.frag_swipe_layout)
+    SwipeRefreshLayout mRefreshLayout;
+    MenuItem exit;
+    MenuItem search;
     // Var
     private ProductViewModel mProductViewModel;
     private MyProductAdapter mAdapter;
@@ -78,6 +99,10 @@ public class ProductListFragment extends Fragment {
         this.configureRecyclerView();
         this.configureViewModel();
         this.getProductList();
+        this.configureSwipeRefreshLayout();
+        this.mValidatorSearch.setOnClickListener(v -> this.clickOnValidatorButton());
+        this.mRadioWith.setOnClickListener(this);
+        this.mRadioWithout.setOnClickListener(this);
 
     }
 
@@ -94,7 +119,7 @@ public class ProductListFragment extends Fragment {
         this.mAdapter = new MyProductAdapter(Glide.with(this));
         this.mRecyclerView.setAdapter(mAdapter);
         this.mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        this.configureItemClick();
+        this.recyclerViewItemClickHandler();
 
     }
 
@@ -115,12 +140,12 @@ public class ProductListFragment extends Fragment {
         int id = item.getItemId();
         switch (id) {
             case R.id.menu_search:
-                Toast.makeText(getContext(), "search", Toast.LENGTH_SHORT).show();
-                this.prepareEntryAnimation();
+                this.entryAnimation();
+                this.closeKeyboard();
                 break;
             case R.id.menu_exit:
-                Toast.makeText(getContext(), "quit", Toast.LENGTH_SHORT).show();
-                this.prepareExitAnimation();
+                this.exitAnimation();
+                this.closeKeyboard();
                 break;
         }
 
@@ -129,14 +154,13 @@ public class ProductListFragment extends Fragment {
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
-        MenuItem exit = menu.findItem(R.id.menu_exit);
-        MenuItem search = menu.findItem(R.id.menu_search);
+        exit = menu.findItem(R.id.menu_exit);
+        search = menu.findItem(R.id.menu_search);
 
         search.setOnMenuItemClickListener(item -> {
             exit.setVisible(true);
             return false;
         });
-
         exit.setOnMenuItemClickListener(item -> {
             exit.setVisible(false);
             return false;
@@ -148,7 +172,7 @@ public class ProductListFragment extends Fragment {
     // Action
     // -------------
 
-    private void configureItemClick() {
+    private void recyclerViewItemClickHandler() {
         ItemClickSupport.addTo(mRecyclerView, R.layout.fragment_products_item)
                 .setOnItemClickListener((recyclerView, position, v) -> {
                     Toast.makeText(getContext(), "Click on position: " + position, Toast.LENGTH_SHORT).show();
@@ -156,6 +180,53 @@ public class ProductListFragment extends Fragment {
                 });
     }
 
+
+    private void clickOnValidatorButton() {
+        //launch request
+        this.handleSearchQuery();
+        //hide the view
+        this.exitAnimation();
+        this.closeKeyboard();
+        //hide exit button
+        this.exit.setVisible(false);
+    }
+
+    private void handleSearchQuery() {
+        String productName = !mEditProductName.toString().equals("") ?
+                "%" + mEditProductName.getText().toString() + "%" : "%";
+        String category = !mEditBrand.toString().equals("") ?
+                "%" + mEditBrand.getText().toString() + "%" : "%";
+
+        Log.d("Tag", "handleSearchQuery: " + INDICATOR_MIN + " - " + INDICATOR_MAX);
+        this.mProductViewModel.searchProducts(productName, category, INDICATOR_MIN, INDICATOR_MAX)
+                .observe(this, this::updateProductList);
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id) {
+            case R.id.button_with:
+                INDICATOR_MIN = 1;
+                INDICATOR_MAX = 3;
+                break;
+            case R.id.button_without:
+                INDICATOR_MIN = -1;
+                INDICATOR_MAX = 0;
+                break;
+        }
+        closeKeyboard();
+    }
+
+    private void closeKeyboard() {
+        View view = Objects.requireNonNull(getActivity()).getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        }
+    }
 
     // -------------
     // UI
@@ -168,19 +239,39 @@ public class ProductListFragment extends Fragment {
     private void updateProductList(List<MyProduct> myProducts) {
         this.mEmptyMessage.setVisibility(myProducts.size() == 0 ? View.VISIBLE : View.GONE);
         this.mAdapter.updateData(myProducts);
+        mRefreshLayout.setRefreshing(false);
     }
 
-    private void prepareEntryAnimation() {
+    private void resetSearchWidgetValues() {
+        mEditProductName.setText("");
+        mEditBrand.setText("");
+        mRadioWith.setChecked(false);
+        mRadioWithout.setChecked(false);
+    }
+
+    private void configureSwipeRefreshLayout() {
+        this.mRefreshLayout.setOnRefreshListener(this::getProductList);
+    }
+
+    // -------------
+    // Animation
+    // -------------
+
+    private void entryAnimation() {
         ObjectAnimator animator = ObjectAnimator.ofFloat(mCardView, View.TRANSLATION_X, mCardView.getWidth(), 0);
-        animator.setDuration(600);
+        animator.setDuration(700);
         animator.setInterpolator(new AnticipateOvershootInterpolator());
         animator.start();
     }
 
-    private void prepareExitAnimation() {
+    private void exitAnimation() {
         ObjectAnimator animator = ObjectAnimator.ofFloat(mCardView, View.TRANSLATION_X, 0, mCardView.getWidth());
-        animator.setDuration(600);
+        animator.setDuration(500);
         animator.setInterpolator(new AnticipateOvershootInterpolator());
         animator.start();
+        //To clear all values
+        this.resetSearchWidgetValues();
     }
+
+
 }

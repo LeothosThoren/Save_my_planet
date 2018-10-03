@@ -23,8 +23,9 @@ public class MyProductDataRepository {
 
     // --- SEARCH ---
 
-    public LiveData<List<MyProduct>> searchProducts(String productName, String category, Integer palmOilInd) {
-        return this.myProductDao.searchProducts(productName, category, palmOilInd);
+    public LiveData<List<MyProduct>> searchProducts(String productName, String brand,
+                                                    Integer palmOilIndMin, Integer palmOilIndMax) {
+        return this.myProductDao.searchProducts(productName, brand, palmOilIndMin, palmOilIndMax);
     }
 
     // --- CREATE ---

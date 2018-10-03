@@ -30,16 +30,16 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/text_input_layout_category"
+            android:id="@+id/text_input_layout_brand"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/text_input_layout_name"
             android:layout_margin="8dp"
-            android:hint="@string/category">
+            android:hint="@string/brand">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/edit_text_product_category"
+                android:id="@+id/edit_text_product_brand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionDone"
@@ -52,7 +52,7 @@
             style="@style/Base.Widget.AppCompat.CompoundButton.RadioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text_input_layout_category"
+            android:layout_below="@id/text_input_layout_brand"
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="8dp"
@@ -75,6 +75,7 @@
         </RadioGroup>
 
         <ImageButton
+            android:id="@+id/validate_search"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_below="@id/radio_group"

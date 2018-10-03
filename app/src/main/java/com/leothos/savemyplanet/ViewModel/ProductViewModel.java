@@ -28,8 +28,9 @@ public class ProductViewModel extends ViewModel {
 
     // --- SEARCH ---
 
-    public LiveData<List<MyProduct>> searchProducts(String productName, String category, Integer palmOilInd) {
-        return mProductDataRepository.searchProducts(productName, category, palmOilInd);
+    public LiveData<List<MyProduct>> searchProducts(String productName, String brand,
+                                                    Integer palmOilIndMin, Integer palmOilIndMax) {
+        return mProductDataRepository.searchProducts(productName, brand, palmOilIndMin, palmOilIndMax);
     }
 
     // --- CREATE ---
