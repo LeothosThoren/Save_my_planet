@@ -40,5 +40,9 @@
     <string name="category">Category</string>
     <string name="with_palm_oil">With palm oil</string>
     <string name="without_palm_oil">Without palm oil</string>
+    <string name="information">Information</string>
+    <string name="watch_video">Watch video</string>
+    <string name="donate">Donate</string>
+    <string name="petitions">Petitions</string>
 
 </resources>
