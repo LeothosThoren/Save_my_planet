@@ -9,7 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.leothos.savemyplanet.R;
-import com.leothos.savemyplanet.controlers.fragments.DashboardFragment;
+import com.leothos.savemyplanet.controlers.fragments.Dashboard;
 import com.leothos.savemyplanet.controlers.fragments.ProductListFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
             = item -> {
         switch (item.getItemId()) {
             case R.id.navigation_home:
-                this.configureFragmentContent(new DashboardFragment());
+                this.configureFragmentContent(new Dashboard());
                 return true;
             case R.id.navigation_scan:
                 this.startActivity(BarcodeCaptureActivity.class);
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        this.configureFragmentContent(new DashboardFragment());
+        this.configureFragmentContent(new Dashboard());
 
     }
 

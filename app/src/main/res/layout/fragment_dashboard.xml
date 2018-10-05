@@ -1,172 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".controlers.fragments.DashboardFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- TODO: Update blank fragment layout -->
-    <com.flaviofaria.kenburnsview.KenBurnsView
-        android:id="@+id/presentation"
-        android:layout_width="match_parent"
-        android:layout_height="230dp"
-        android:src="@drawable/orang_outang" />
-
-    <android.support.v7.widget.GridLayout
+    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/presentation"
-        app:columnCount="2"
-        app:rowCount="2"
-        android:padding="1dp"
-        app:useDefaultMargins="true">
+        android:background="@color/colorGrey"
+        tools:context=".controlers.fragments.Dashboard">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/card_one"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@color/colorGrey"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="1dp"
-            app:cardMaxElevation="2dp"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1">
-
-            <RelativeLayout
+        <!--Carousel-->
+        <ViewSwitcher
+            android:id="@+id/viewSwitcher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inAnimation="@android:anim/fade_in"
+            android:outAnimation="@android:anim/fade_out">
+            <!--External library-->
+            <com.flaviofaria.kenburnsview.KenBurnsView
+                android:id="@+id/presentation1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorAccent">
+                android:layout_height="250dp"
+                android:src="@drawable/family_apes" />
 
-                <ImageView
-                    android:id="@+id/information"
+            <com.flaviofaria.kenburnsview.KenBurnsView
+                android:id="@+id/presentation2"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:src="@drawable/orangutan_tree" />
+
+        </ViewSwitcher>
+
+
+        <!--Grid Layout-->
+        <android.support.v7.widget.GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/viewSwitcher"
+            android:padding="4dp"
+            app:columnCount="2"
+            app:rowCount="2"
+            app:useDefaultMargins="true">
+
+            <!--Information-->
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_one"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@color/colorGrey"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="1dp"
+                app:cardMaxElevation="2dp"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1">
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="center"
-                    android:src="@drawable/knowledge" />
+                    android:background="@color/colorAccent">
 
-                <TextView
-                    android:id="@+id/information_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="@drawable/transparent_foreground"
-                    android:gravity="center"
-                    android:text="@string/information"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorWhite" />
-            </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/information"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="center"
+                        android:src="@drawable/knowledge" />
 
-        </android.support.v7.widget.CardView>
+                    <TextView
+                        android:id="@+id/information_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/transparent_foreground"
+                        android:gravity="center"
+                        android:text="@string/information"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorWhite" />
+                </RelativeLayout>
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/card_two"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="1dp"
-            app:cardMaxElevation="2dp"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1">
+            </android.support.v7.widget.CardView>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorRed">
+            <!--Video-->
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_two"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="1dp"
+                app:cardMaxElevation="2dp"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1">
 
-                <ImageView
-                    android:id="@+id/youtube"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="center"
-                    android:src="@drawable/youtube" />
-
-                <TextView
-                    android:id="@+id/youtube_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="@drawable/transparent_foreground"
-                    android:gravity="center"
-                    android:text="@string/watch_video"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorWhite" />
-            </RelativeLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/card_three"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="1dp"
-            app:cardMaxElevation="2dp"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorGreen">
-
-                <ImageView
-                    android:id="@+id/donate"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="center"
-                    android:src="@drawable/heart" />
+                    android:background="@color/colorRed">
 
-                <TextView
-                    android:id="@+id/donate_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="@drawable/transparent_foreground"
-                    android:gravity="center"
-                    android:text="@string/donate"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorWhite" />
-            </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/youtube"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="center"
+                        android:src="@drawable/youtube" />
 
-        </android.support.v7.widget.CardView>
+                    <TextView
+                        android:id="@+id/youtube_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/transparent_foreground"
+                        android:gravity="center"
+                        android:text="@string/watch_video"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorWhite" />
+                </RelativeLayout>
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/card_four"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="1dp"
-            app:cardMaxElevation="2dp"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1">
+            </android.support.v7.widget.CardView>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorPrimary">
+            <!--Donation-->
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_three"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="1dp"
+                app:cardMaxElevation="2dp"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1">
 
-                <ImageView
-                    android:id="@+id/petition"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="center"
-                    android:src="@drawable/petition" />
+                    android:background="@color/colorGreen">
 
-                <TextView
-                    android:id="@+id/petition_description"
+                    <ImageView
+                        android:id="@+id/donate"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="center"
+                        android:src="@drawable/heart" />
+
+                    <TextView
+                        android:id="@+id/donate_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/transparent_foreground"
+                        android:gravity="center"
+                        android:text="@string/donate"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorWhite" />
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <!--Petition-->
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_four"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="1dp"
+                app:cardMaxElevation="2dp"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1">
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="@drawable/transparent_foreground"
-                    android:gravity="center"
-                    android:text="@string/petitions"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorWhite" />
-            </RelativeLayout>
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimary">
 
-        </android.support.v7.widget.CardView>
+                    <ImageView
+                        android:id="@+id/petition"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="center"
+                        android:src="@drawable/petition" />
 
-    </android.support.v7.widget.GridLayout>
+                    <TextView
+                        android:id="@+id/petition_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/transparent_foreground"
+                        android:gravity="center"
+                        android:text="@string/petitions"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorWhite" />
+                </RelativeLayout>
 
-</RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+        </android.support.v7.widget.GridLayout>
+
+    </RelativeLayout>
+</layout>
