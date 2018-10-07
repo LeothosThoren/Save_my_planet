@@ -57,7 +57,7 @@ public class ResponseActivity extends AppCompatActivity {
 
     // Constant
     public static final String CUSTOM_DIALOG_IMAGE = "CUSTOM_DIALOG_IMAGE";
-    public static final String BUNDLE_KEY = "BUNDLE_KEY";
+    public static final String BUNDLE_KEY_RESPONSE = "BUNDLE_KEY";
     //    private static final int RC_BARCODE_CAPTURE = 9001;
     private static final String TAG = ResponseActivity.class.getSimpleName();
     // DataBinding
@@ -178,7 +178,7 @@ public class ResponseActivity extends AppCompatActivity {
     private void openCustomDialog() {
         DisplayImageBigSize imageBigSize = new DisplayImageBigSize();
         Bundle args = new Bundle();
-        args.putString(BUNDLE_KEY, mOpenFoodFact.getProduct().getImageFrontUrl());
+        args.putString(BUNDLE_KEY_RESPONSE, mOpenFoodFact.getProduct().getImageFrontUrl());
         imageBigSize.setArguments(args);
         imageBigSize.setStyle(DialogFragment.STYLE_NO_TITLE, DialogFragment.STYLE_NO_INPUT);
         imageBigSize.show(getSupportFragmentManager(), CUSTOM_DIALOG_IMAGE);
@@ -213,6 +213,8 @@ public class ResponseActivity extends AppCompatActivity {
     }
 
     private void saveProduct() {
+
+        // Add condition check if it's not in room and prevent to save null object
         MyProduct products = new MyProduct(
                 mOpenFoodFact.getProduct().getProductName(),
                 mOpenFoodFact.getProduct().getBrands(),
@@ -228,26 +230,4 @@ public class ResponseActivity extends AppCompatActivity {
         Toast.makeText(this, "Product saved!", Toast.LENGTH_SHORT).show();
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if (requestCode == RC_BARCODE) {
-//            if (resultCode == CommonStatusCodes.SUCCESS) {
-//                if (data != null) {
-//                    Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
-//                    statusMessage.setText(R.string.barcode_success);
-//                    barcodeValue.setText(barcode.displayValue);
-//                    Log.d(TAG, "Barcode read: " + barcode.displayValue);
-//                } else {
-//                    statusMessage.setText(R.string.barcode_failure);
-//                    Log.d(TAG, "No barcode captured, intent data is null");
-//                }
-//            } else {
-//                statusMessage.setText(String.format(getString(R.string.barcode_error),
-//                        CommonStatusCodes.getStatusCodeString(resultCode)));
-//            }
-//        }
-//        else {
-//            super.onActivityResult(requestCode, resultCode, data);
-//        }
-//    }
 }

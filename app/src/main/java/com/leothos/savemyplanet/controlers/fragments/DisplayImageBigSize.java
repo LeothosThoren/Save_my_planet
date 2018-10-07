@@ -15,7 +15,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.leothos.savemyplanet.R;
 import com.leothos.savemyplanet.databinding.FragmentDisplayImageBigSizeBinding;
 
-import static com.leothos.savemyplanet.controlers.activities.ResponseActivity.BUNDLE_KEY;
+import static com.leothos.savemyplanet.controlers.activities.ResponseActivity.BUNDLE_KEY_RESPONSE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,13 +31,12 @@ public class DisplayImageBigSize extends DialogFragment {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_display_image_big_size, container, false);
         View view = mBinding.getRoot();
         // Retrieve data
-        String url = getArguments() != null ? getArguments().getString(BUNDLE_KEY) : null;
+        String url = getArguments() != null ? getArguments().getString(BUNDLE_KEY_RESPONSE) : null;
         mBinding.closeButton.setOnClickListener(v -> getDialog().dismiss());
         Glide.with(this).load(url).apply(RequestOptions.centerCropTransform()).into(mBinding.bigSizeImage);
 
         return view;
     }
-
 
 
 }

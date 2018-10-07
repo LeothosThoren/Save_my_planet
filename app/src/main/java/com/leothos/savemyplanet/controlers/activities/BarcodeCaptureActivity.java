@@ -30,10 +30,16 @@ import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Toast;
@@ -44,13 +50,14 @@ import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.leothos.savemyplanet.R;
+import com.leothos.savemyplanet.controlers.fragments.Dashboard;
+import com.leothos.savemyplanet.controlers.fragments.ProductListFragment;
 import com.leothos.savemyplanet.ui.barcodegraphic.BarcodeGraphic;
 import com.leothos.savemyplanet.ui.barcodegraphic.BarcodeGraphicTracker;
 import com.leothos.savemyplanet.ui.barcodegraphic.BarcodeTrackerFactory;
 import com.leothos.savemyplanet.ui.camera.CameraSource;
 import com.leothos.savemyplanet.ui.camera.CameraSourcePreview;
 import com.leothos.savemyplanet.ui.camera.GraphicOverlay;
-import com.leothos.savemyplanet.utils.AddNewProduct;
 
 import java.io.IOException;
 
@@ -80,6 +87,22 @@ public final class BarcodeCaptureActivity extends AppCompatActivity implements B
     private CheckBox useFlash;
     private boolean isFlashActive = false;
 
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = item -> {
+        switch (item.getItemId()) {
+            case R.id.navigation_home:
+                this.startActivity(MainActivity.class);
+                return true;
+            case R.id.navigation_scan:
+                //None
+                return true;
+            case R.id.navigation_history:
+                this.startActivity(MainActivity.class);
+                return true;
+        }
+        return false;
+    };
+
     /**
      * Initializes the UI and creates the detector pipeline.
      */
@@ -88,9 +111,16 @@ public final class BarcodeCaptureActivity extends AppCompatActivity implements B
         super.onCreate(icicle);
         setContentView(R.layout.barcode_capture);
 
+        // Set variable
         mPreview = findViewById(R.id.preview);
         mGraphicOverlay = findViewById(R.id.graphicOverlay);
         useFlash = findViewById(R.id.use_flash);
+        //Bottom navigation view
+        BottomNavigationView navigation = findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        Menu menu = navigation.getMenu();
+        MenuItem menuItem = menu.getItem(1);
+        menuItem.setChecked(true);
 
 
         // Check for the camera permission before accessing the camera.  If the
@@ -297,6 +327,15 @@ public final class BarcodeCaptureActivity extends AppCompatActivity implements B
                     .show();
         }
         finish();
+    }
+
+    // ----------
+    // Action
+    // ----------
+
+    private void startActivity(Class activity) {
+        Intent i = new Intent(this, activity);
+        startActivity(i);
     }
 
 }

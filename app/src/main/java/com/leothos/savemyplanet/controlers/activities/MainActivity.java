@@ -19,12 +19,14 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.navigation_home:
                 this.configureFragmentContent(new Dashboard());
+                item.setChecked(true);
                 return true;
             case R.id.navigation_scan:
                 this.startActivity(BarcodeCaptureActivity.class);
                 return true;
             case R.id.navigation_history:
                 this.configureFragmentContent(new ProductListFragment());
+                item.setChecked(true);
                 return true;
         }
         return false;
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
         this.configureFragmentContent(new Dashboard());
 
     }
