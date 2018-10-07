@@ -22,6 +22,7 @@ public class Dashboard extends Fragment implements KenBurnsView.TransitionListen
 
     // Constant
     public static final String WEB_VIEW_DIALOG = "com.leothos.savemyplanet.controlers.fragments.WebViewDialog";
+    public static final String YOUTUBE_DIALOG = "com.leothos.savemyplanet.controlers.fragments.YouTubeDialog";
     public static final String BUNDLE_INT = "BUNDLE_INT";
     private static final int TRANSITIONS_TO_SWITCH = 2;
     private static final String TAG = "Dashboard";
@@ -66,7 +67,7 @@ public class Dashboard extends Fragment implements KenBurnsView.TransitionListen
                 Log.d(TAG, "onClick: id" + id);
                 break;
             case R.id.youtube:
-                this.openWebView(id);
+                this.openYoutubeView();
                 Log.d(TAG, "onClick: id" + id);
                 break;
             case R.id.donate:
@@ -93,9 +94,18 @@ public class Dashboard extends Fragment implements KenBurnsView.TransitionListen
         if (getFragmentManager() != null) {
             dialog.show(getFragmentManager(), WEB_VIEW_DIALOG);
         }
-
     }
 
+    private void openYoutubeView() {
+        YouTubeDialog youTubeDialog = new YouTubeDialog();
+//        Bundle bundle = new Bundle();
+//        bundle.putInt(BUNDLE_INT, id);
+//        youTubeDialog.setArguments(bundle);
+        youTubeDialog.setStyle(android.app.DialogFragment.STYLE_NO_TITLE, R.style.Dialog_FullScreen);
+        if (getFragmentManager() != null) {
+            youTubeDialog.show(getFragmentManager(), YOUTUBE_DIALOG);
+        }
+    }
 
     @Override
     public void onTransitionStart(Transition transition) {

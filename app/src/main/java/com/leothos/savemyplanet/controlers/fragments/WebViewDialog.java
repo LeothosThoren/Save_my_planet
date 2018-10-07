@@ -3,6 +3,7 @@ package com.leothos.savemyplanet.controlers.fragments;
 
 import android.annotation.SuppressLint;
 import android.databinding.DataBindingUtil;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -12,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
@@ -29,7 +32,7 @@ import static com.leothos.savemyplanet.controlers.fragments.Dashboard.BUNDLE_INT
 /**
  * A simple {@link Fragment} subclass.
  */
-public class WebViewDialog extends DialogFragment implements  YouTubePlayer.OnInitializedListener{
+public class WebViewDialog extends DialogFragment {
 
     // Constant
     public static final String INFORMATION_URL = "https://www.nationalgeographic.fr/environnement/ce-quil-faut-savoir-sur-lhuile-de-palme";
@@ -38,13 +41,9 @@ public class WebViewDialog extends DialogFragment implements  YouTubePlayer.OnIn
     public static final String PETITION_URL = "https://www.sauvonslaforet.org/petitions/1074/pas-de-plantation-dhuile-de-palme-dans-cette-foret";
     public static final String PETITION_JS = "javascript:document.getElementById('petition-form').style.display = 'block';";
     private static final String DONATE_URL = "https://www.sauvonslaforet.org/dons/98/soutenir-sauvons-la-foret";
-    public static final String YOUTUBE_URL = "wv_Ayh1bY5s"; /*&feature=player_embedded*/
     private static final String TAG = "WebViewDialog";
     //Databinding
     private FragmentWebViewDialogBinding mWebViewBinding;
-    // Var
-    @BindView(R.id.youtube_view)
-    YouTubePlayerView mYouTubePlayerView;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -80,9 +79,9 @@ public class WebViewDialog extends DialogFragment implements  YouTubePlayer.OnIn
             case R.id.information:
                 this.webViewPlayer(INFORMATION_URL, INFORMATION_JS);
                 break;
-            case R.id.youtube:
-               this.youtubePlayer();
-                break;
+//            case R.id.youtube:
+////               this.youtubePlayer();
+//                break;
             case R.id.donate:
                 this.webViewPlayer(DONATE_URL, DONATE_JS);
                 break;
@@ -92,7 +91,7 @@ public class WebViewDialog extends DialogFragment implements  YouTubePlayer.OnIn
 
         // Close button
         mWebViewBinding.closeWebView.setOnClickListener(v -> {
-            mWebViewBinding.webViewSwitcher.reset();
+//            mWebViewBinding.webViewSwitcher.reset();
             getDialog().dismiss();
         });
     }
@@ -106,29 +105,21 @@ public class WebViewDialog extends DialogFragment implements  YouTubePlayer.OnIn
     private void webViewPlayer(final String uri, final String js) {
         mWebViewBinding.webView.loadUrl(uri);
         mWebViewBinding.webView.getSettings().setJavaScriptEnabled(true);
-//        mWebViewBinding.webView.setWebViewClient(new WebViewClient() {
-//            @Override
-//            public void onPageFinished(WebView view, String url) {
+        mWebViewBinding.webView.setWebViewClient(new WebViewClient() {
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
 //                view.loadUrl(js);
-//            }
-//        });
+                mWebViewBinding.webView.loadUrl(uri);
+            }
+        });
 //
     }
 
-    private void youtubePlayer() {
-        mWebViewBinding.webViewSwitcher.getNextView();
-        mYouTubePlayerView.initialize(YouTubeApi.getApiKey(), this);
-    }
 
-    // Interface
-    @Override
-    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-        Log.d(TAG, "onInitializationSuccess: done initializing.");
-        youTubePlayer.loadVideo(YOUTUBE_URL);
-    }
-
-    @Override
-    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-        Log.d(TAG, "onInitializationFailure: Failed to initialize.");
-    }
 }
