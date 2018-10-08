@@ -246,6 +246,8 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         mEditBrand.setText("");
         mRadioWith.setChecked(false);
         mRadioWithout.setChecked(false);
+        INDICATOR_MIN = -1;
+        INDICATOR_MAX = 3;
     }
 
     private void configureSwipeRefreshLayout() {
@@ -258,7 +260,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
 
     private void entryAnimation() {
         ObjectAnimator animator = ObjectAnimator.ofFloat(mCardView, View.TRANSLATION_X, mCardView.getWidth(), 0);
-        animator.setDuration(700);
+        animator.setDuration(800);
         animator.setInterpolator(new AnticipateOvershootInterpolator());
         animator.start();
     }
