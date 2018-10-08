@@ -47,12 +47,12 @@ import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.leothos.savemyplanet.R;
-import com.leothos.savemyplanet.ui.barcodegraphic.BarcodeGraphic;
-import com.leothos.savemyplanet.ui.barcodegraphic.BarcodeGraphicTracker;
-import com.leothos.savemyplanet.ui.barcodegraphic.BarcodeTrackerFactory;
-import com.leothos.savemyplanet.ui.camera.CameraSource;
-import com.leothos.savemyplanet.ui.camera.CameraSourcePreview;
-import com.leothos.savemyplanet.ui.camera.GraphicOverlay;
+import com.leothos.savemyplanet.views.ui.barcodegraphic.BarcodeGraphic;
+import com.leothos.savemyplanet.views.ui.barcodegraphic.BarcodeGraphicTracker;
+import com.leothos.savemyplanet.views.ui.barcodegraphic.BarcodeTrackerFactory;
+import com.leothos.savemyplanet.views.ui.camera.CameraSource;
+import com.leothos.savemyplanet.views.ui.camera.CameraSourcePreview;
+import com.leothos.savemyplanet.views.ui.camera.GraphicOverlay;
 
 import java.io.IOException;
 
