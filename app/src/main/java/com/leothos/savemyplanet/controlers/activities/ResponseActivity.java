@@ -175,7 +175,7 @@ public class ResponseActivity extends AppCompatActivity {
     // Action
     // -------------
 
-    private void openCustomDialog() {
+    private void openCustomImageResizerDialog() {
         DisplayImageBigSize imageBigSize = new DisplayImageBigSize();
         Bundle args = new Bundle();
         args.putString(BUNDLE_KEY_RESPONSE, mOpenFoodFact.getProduct().getImageFrontUrl());
@@ -183,6 +183,30 @@ public class ResponseActivity extends AppCompatActivity {
         imageBigSize.setStyle(DialogFragment.STYLE_NO_TITLE, DialogFragment.STYLE_NO_INPUT);
         imageBigSize.show(getSupportFragmentManager(), CUSTOM_DIALOG_IMAGE);
 
+    }
+
+    private void saveProduct() {
+        // Add condition check if it's not in room and prevent to save null object
+        MyProduct products = new MyProduct(
+                mOpenFoodFact.getProduct().getProductName() != null ?
+                        mOpenFoodFact.getProduct().getProductName() : getString(R.string.not_specified),
+                mOpenFoodFact.getProduct().getBrands() != null ?
+                        mOpenFoodFact.getProduct().getBrands() : getString(R.string.not_specified),
+                mOpenFoodFact.getProduct().getCategories() != null ?
+                        mOpenFoodFact.getProduct().getCategories() : getString(R.string.not_specified),
+                mOpenFoodFact.getProduct().getImageFrontUrl() != null ?
+                        mOpenFoodFact.getProduct().getImageFrontUrl() : getString(R.string.url_resource),
+                mOpenFoodFact.getProduct().getQuantity() != null ?
+                        mOpenFoodFact.getProduct().getQuantity() : getString(R.string.not_specified),
+                mOpenFoodFact.getProduct().getIngredientsFromPalmOilN() != null ?
+                        mOpenFoodFact.getProduct().getIngredientsFromPalmOilN() : -1,
+                mOpenFoodFact.getProduct().getNutritionGrades() != null ?
+                        mOpenFoodFact.getProduct().getNutritionGrades() : getString(R.string.not_specified),
+                Calendar.getInstance().getTime(),
+                mOpenFoodFact.getCode());
+
+        mProductViewModel.insertProduct(products);
+        Toast.makeText(this, "Product saved!", Toast.LENGTH_SHORT).show();
     }
 
     // -------------
@@ -206,28 +230,10 @@ public class ResponseActivity extends AppCompatActivity {
         } else {
             mBinding.cardviewLayout.setVisibility(View.GONE);
             mBinding.scrollView.setVisibility(View.VISIBLE);
-            mBinding.productPicture.setOnClickListener(v -> this.openCustomDialog());
+            mBinding.productPicture.setOnClickListener(v -> this.openCustomImageResizerDialog());
             this.saveProduct();
         }
 
-    }
-
-    private void saveProduct() {
-
-        // Add condition check if it's not in room and prevent to save null object
-        MyProduct products = new MyProduct(
-                mOpenFoodFact.getProduct().getProductName(),
-                mOpenFoodFact.getProduct().getBrands(),
-                mOpenFoodFact.getProduct().getCategories(),
-                mOpenFoodFact.getProduct().getImageFrontUrl(),
-                mOpenFoodFact.getProduct().getQuantity(),
-                mOpenFoodFact.getProduct().getIngredientsFromPalmOilN(),
-                mOpenFoodFact.getProduct().getNutritionGrades(),
-                Calendar.getInstance().getTime(),
-                mOpenFoodFact.getCode());
-
-        mProductViewModel.insertProduct(products);
-        Toast.makeText(this, "Product saved!", Toast.LENGTH_SHORT).show();
     }
 
 }

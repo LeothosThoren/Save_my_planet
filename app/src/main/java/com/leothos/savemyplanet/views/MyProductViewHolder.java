@@ -54,6 +54,10 @@ public class MyProductViewHolder extends RecyclerView.ViewHolder {
                 this.productQuality.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_indicator_orange, 0, 0, 0);
                 this.productQuality.setText(R.string.may_contain_palm_oil);
                 break;
+            default:
+                this.productQuality.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_indicator_orange, 0, 0, 0);
+                this.productQuality.setText(R.string.not_specified);
+                break;
         }
 
     }

@@ -1,8 +1,6 @@
 package com.leothos.savemyplanet.utils;
 
 import android.graphics.drawable.Drawable;
-import android.text.Html;
-import android.text.Spanned;
 
 import java.util.HashMap;
 
@@ -13,8 +11,10 @@ public class BusinessLogic {
             return ok;
         } else if (number == 1) {
             return bad;
+        } else {
+            return warning;
         }
-        return warning;
+
     }
 
 
@@ -23,8 +23,10 @@ public class BusinessLogic {
             return ok;
         } else if (number == 1) {
             return bad;
+        } else {
+            return warning;
         }
-        return warning;
+
     }
 
     public static Drawable getNutriScore(String score, Drawable a, Drawable b, Drawable c, Drawable d, Drawable e) {
@@ -38,8 +40,5 @@ public class BusinessLogic {
         return hashMap.get(score) != null ? hashMap.get(score) : e;
     }
 
-    public static Spanned displayHtml(String source) {
-        return Html.fromHtml(source);
-    }
 
 }

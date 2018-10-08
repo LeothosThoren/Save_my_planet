@@ -26,9 +26,6 @@
     <string name="scan">scan</string>
     <string name="product_no_found">Product not found, would you like to add it?</string>
     <string name="barcode_no_found">Unknown barcode</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="product_picture">Product picture</string>
     <string name="close_window">close window</string>
     <string name="brand">brand</string>
@@ -44,5 +41,7 @@
     <string name="watch_video">Watch video</string>
     <string name="donate">Donate</string>
     <string name="petitions">Petitions</string>
+    <string name="not_specified">Not specified</string>
+    <string name="url_resource">https://www.freeiconspng.com/uploads/no-image-icon-15.png</string>
 
 </resources>
