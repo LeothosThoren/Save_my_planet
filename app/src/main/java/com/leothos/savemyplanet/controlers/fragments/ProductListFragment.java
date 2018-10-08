@@ -91,7 +91,6 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         setHasOptionsMenu(true);
         this.init();
         return view;
-
     }
 
     private void init() {

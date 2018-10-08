@@ -33,9 +33,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -50,8 +47,6 @@ import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.leothos.savemyplanet.R;
-import com.leothos.savemyplanet.controlers.fragments.Dashboard;
-import com.leothos.savemyplanet.controlers.fragments.ProductListFragment;
 import com.leothos.savemyplanet.ui.barcodegraphic.BarcodeGraphic;
 import com.leothos.savemyplanet.ui.barcodegraphic.BarcodeGraphicTracker;
 import com.leothos.savemyplanet.ui.barcodegraphic.BarcodeTrackerFactory;
@@ -60,6 +55,9 @@ import com.leothos.savemyplanet.ui.camera.CameraSourcePreview;
 import com.leothos.savemyplanet.ui.camera.GraphicOverlay;
 
 import java.io.IOException;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import static com.google.android.gms.vision.barcode.Barcode.EAN_13;
 import static com.google.android.gms.vision.barcode.Barcode.EAN_8;
@@ -74,30 +72,41 @@ public final class BarcodeCaptureActivity extends AppCompatActivity implements B
 
     // constants used to pass extra data in the intent
     public static final String BarcodeObject = "Barcode";
+    public static final String INTENT_PUT_EXTRA = "com.leothos.savemyplanet.controlers.activities.BarcodeCaptureActivity";
     private static final String TAG = BarcodeCaptureActivity.class.getSimpleName();
+    public static final int SCANNER_ITEM = 1;
+    public static final int HOME_ID = 0;
+    public static final int HISTORY_ID = 1;
     // intent request code to handle updating play services if needed.
     private static final int RC_HANDLE_GMS = 9001;
     // permission request codes need to be < 256
     private static final int RC_HANDLE_CAMERA_PERM = 2;
     //Widget
+    @BindView(R.id.preview)
+    CameraSourcePreview mPreview;
+    @BindView(R.id.graphicOverlay)
+    GraphicOverlay<BarcodeGraphic> mGraphicOverlay;
+    @BindView(R.id.navigation)
+    BottomNavigationView navigation;
+    @BindView(R.id.use_flash)
+    CheckBox useFlash;
+    // Var
     private CameraSource mCameraSource;
-    private CameraSourcePreview mPreview;
-    private GraphicOverlay<BarcodeGraphic> mGraphicOverlay;
-
-    private CheckBox useFlash;
     private boolean isFlashActive = false;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
         switch (item.getItemId()) {
             case R.id.navigation_home:
-                this.startActivity(MainActivity.class);
+                this.startActivityWithData(MainActivity.class, HOME_ID);
+                finish();
                 return true;
             case R.id.navigation_scan:
                 //None
                 return true;
             case R.id.navigation_history:
-                this.startActivity(MainActivity.class);
+                this.startActivityWithData(MainActivity.class, HISTORY_ID);
+                finish();
                 return true;
         }
         return false;
@@ -110,19 +119,9 @@ public final class BarcodeCaptureActivity extends AppCompatActivity implements B
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.barcode_capture);
+        ButterKnife.bind(this);
 
-        // Set variable
-        mPreview = findViewById(R.id.preview);
-        mGraphicOverlay = findViewById(R.id.graphicOverlay);
-        useFlash = findViewById(R.id.use_flash);
-        //Bottom navigation view
-        BottomNavigationView navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        Menu menu = navigation.getMenu();
-        MenuItem menuItem = menu.getItem(1);
-        menuItem.setChecked(true);
-
-
+        this.configureBottomNavigationView();
         // Check for the camera permission before accessing the camera.  If the
         // permission is not granted yet, request permission.
         int rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
@@ -131,18 +130,6 @@ public final class BarcodeCaptureActivity extends AppCompatActivity implements B
         } else {
             requestCameraPermission();
         }
-
-    }
-
-    public void onCheckboxClicked(View view) {
-        // Is the view now checked?
-        isFlashActive = ((CheckBox) view).isChecked();
-        if (isFlashActive || useFlash.isChecked()) {
-            mCameraSource.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-        } else {
-            mCameraSource.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-        }
-        Log.d(TAG, "onResume: checked? " + isFlashActive);
 
     }
 
@@ -313,6 +300,24 @@ public final class BarcodeCaptureActivity extends AppCompatActivity implements B
         }
     }
 
+
+    // --------------
+    // Configuration
+    // --------------
+
+    private void configureBottomNavigationView() {
+        // setChecked the icon item of the middle
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        Menu menu = navigation.getMenu();
+        MenuItem menuItem = menu.getItem(SCANNER_ITEM);
+        menuItem.setChecked(true);
+    }
+
+
+    // ----------
+    // Action
+    // ----------
+
     @Override
     public void onBarcodeDetected(Barcode barcode) {
         //do something with barcode data returned
@@ -329,13 +334,24 @@ public final class BarcodeCaptureActivity extends AppCompatActivity implements B
         finish();
     }
 
-    // ----------
-    // Action
-    // ----------
 
-    private void startActivity(Class activity) {
+    private void startActivityWithData(Class activity, int id) {
         Intent i = new Intent(this, activity);
+        i.putExtra(INTENT_PUT_EXTRA, id);
         startActivity(i);
+    }
+
+
+    public void onCheckboxClicked(View view) {
+        // Is the view now checked?
+        isFlashActive = ((CheckBox) view).isChecked();
+        if (isFlashActive || useFlash.isChecked()) {
+            mCameraSource.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+        } else {
+            mCameraSource.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+        }
+        Log.d(TAG, "onResume: checked? " + isFlashActive);
+
     }
 
 }

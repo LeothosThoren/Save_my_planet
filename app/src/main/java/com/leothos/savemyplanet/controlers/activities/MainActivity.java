@@ -7,26 +7,33 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.leothos.savemyplanet.R;
 import com.leothos.savemyplanet.controlers.fragments.Dashboard;
 import com.leothos.savemyplanet.controlers.fragments.ProductListFragment;
 
+import static com.leothos.savemyplanet.controlers.activities.BarcodeCaptureActivity.HISTORY_ID;
+import static com.leothos.savemyplanet.controlers.activities.BarcodeCaptureActivity.HOME_ID;
+import static com.leothos.savemyplanet.controlers.activities.BarcodeCaptureActivity.INTENT_PUT_EXTRA;
+
 public class MainActivity extends AppCompatActivity {
 
+    // Constant
+    public static final int HISTORY_ITEM = 2;
+    // Var
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
         switch (item.getItemId()) {
             case R.id.navigation_home:
                 this.configureFragmentContent(new Dashboard());
-                item.setChecked(true);
                 return true;
             case R.id.navigation_scan:
                 this.startActivity(BarcodeCaptureActivity.class);
                 return true;
             case R.id.navigation_history:
                 this.configureFragmentContent(new ProductListFragment());
-                item.setChecked(true);
                 return true;
         }
         return false;
@@ -37,11 +44,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        this.configureBottomNavigationView();
+
+    }
+
+    // --------------
+    // Configuration
+    // --------------
+
+    private void configureBottomNavigationView() {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        Menu menu = navigation.getMenu();
+        int id = getIntent().getIntExtra(INTENT_PUT_EXTRA, 0);
+        if (id == HOME_ID) {
+            this.configureFragmentContent(new Dashboard());
+        } else if (id == HISTORY_ID) {
+            this.configureFragmentContent(new ProductListFragment());
 
-        this.configureFragmentContent(new Dashboard());
-
+            MenuItem menuItem = menu.getItem(HISTORY_ITEM);
+            menuItem.setChecked(true);
+        }
     }
 
     private void startActivity(Class activity) {
@@ -55,5 +78,6 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.content_frame, fragment).commit();
     }
+
 
 }
