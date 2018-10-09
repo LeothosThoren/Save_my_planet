@@ -19,6 +19,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.AnticipateOvershootInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -89,6 +90,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         View view = inflater.inflate(R.layout.fragment_products_list, container, false);
         ButterKnife.bind(this, view);
         setHasOptionsMenu(true);
+
         this.init();
         return view;
     }
