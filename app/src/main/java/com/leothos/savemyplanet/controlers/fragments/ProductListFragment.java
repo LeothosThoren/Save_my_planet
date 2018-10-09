@@ -196,6 +196,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         String category = !mEditBrand.toString().equals("") ?
                 "%" + mEditBrand.getText().toString() + "%" : "%";
 
+        // Search request
         Log.d("Tag", "handleSearchQuery: " + INDICATOR_MIN + " - " + INDICATOR_MAX);
         this.mProductViewModel.searchProducts(productName, category, INDICATOR_MIN, INDICATOR_MAX)
                 .observe(this, this::updateProductList);
