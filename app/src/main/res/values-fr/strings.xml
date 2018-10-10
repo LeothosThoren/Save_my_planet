@@ -7,7 +7,7 @@
     <string name="low_storage_error">Mémoire faible</string>
     <string name="title_activity_main">Sauve ma planète</string>
     <string name="barcode_header">Entête code barre</string>
-    <string name="read_barcode">Lire le code barre</string>
+    <string name="read_barcode">Scanner le code barre</string>
     <string name="auto_focus">Auto-focus</string>
     <string name="use_flash">Utilisez le flash</string>
     <string name="barcode_success">Code barre succès</string>

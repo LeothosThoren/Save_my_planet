@@ -2,6 +2,7 @@
     package="com.leothos.savemyplanet">
 
     <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -33,15 +34,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controlers.activities.DetailProductActivity">
+        <activity
+            android:name=".controlers.activities.DetailProductActivity"
+            android:label="@string/product_detail">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".controlers.activities.MainActivity" />
         </activity>
         <activity
             android:name=".controlers.activities.BarcodeCaptureActivity"
-            android:label="Read Barcode"
-            android:theme="@style/AppTheme" />
+            android:label="@string/read_barcode"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".controlers.activities.MainActivity" />
+        </activity>
 
     </application>
 
