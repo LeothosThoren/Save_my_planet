@@ -24,7 +24,7 @@
     <string name="health">Health</string>
     <string name="ingredients">Ingredients</string>
     <string name="scan">scan</string>
-    <string name="product_no_found">Product not found, would you like to add it?</string>
+    <string name="product_no_found">Product not found</string>
     <string name="barcode_no_found">Unknown barcode</string>
     <string name="product_picture">Product picture</string>
     <string name="close_window">close window</string>
@@ -44,5 +44,8 @@
     <string name="not_specified">Not specified</string>
     <string name="url_resource">https://www.freeiconspng.com/uploads/no-image-icon-15.png</string>
     <string name="product_saved">Product saved!</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="go_back">Return</string>
+    <string name="product_detail">Product detail</string>
 
 </resources>

@@ -40,7 +40,7 @@ import com.leothos.savemyplanet.entities.MyProduct;
 import com.leothos.savemyplanet.injections.Injection;
 import com.leothos.savemyplanet.injections.ViewModelFactory;
 import com.leothos.savemyplanet.models.OpenFoodFact;
-import com.leothos.savemyplanet.utils.AddNewProduct;
+import com.leothos.savemyplanet.utils.SnackAction;
 
 import java.util.Calendar;
 
@@ -225,7 +225,7 @@ public class DetailProductActivity extends AppCompatActivity {
             mBinding.noFoundImage.setVisibility(View.VISIBLE);
             Snackbar.make(findViewById(R.id.coordinator), R.string.product_no_found,
                     Snackbar.LENGTH_INDEFINITE)
-                    .setAction("ADD", new AddNewProduct(this))
+                    .setAction(getString(R.string.dismiss), new SnackAction(DetailProductActivity.this))
                     .setActionTextColor(Color.GREEN)
                     .show();
         } else {
