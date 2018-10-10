@@ -15,8 +15,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-           >
+            android:layout_height="wrap_content">
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/item_product_picture"
@@ -34,6 +33,7 @@
                 android:orientation="vertical"
                 android:padding="4dp">
 
+                <!--Product name-->
                 <TextView
                     android:id="@+id/item_product_name"
                     android:layout_width="wrap_content"
@@ -43,6 +43,7 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
+                <!--Brand and content-->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -69,26 +70,35 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/item_product_quality"
-                    android:layout_width="wrap_content"
+                <!--Arrow icon-->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/quality"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <TextView
+                        android:id="@+id/item_product_quality"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="95"
+                        android:gravity="center_vertical"
+                        android:text="@string/quality"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/arrow_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:src="@drawable/ic_arrow_right" />
+                </LinearLayout>
+
 
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/arrow_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_arrow_right" />
 
             <!--Collapsing product details-->
 
@@ -107,16 +117,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
+                    android:orientation="horizontal"
                     android:weightSum="100">
 
                     <TextView
                         android:id="@+id/nutriscore_text"
                         android:layout_width="0dp"
-                        android:textStyle="bold"
                         android:layout_height="wrap_content"
                         android:layout_weight="90"
                         android:text="@string/nutri_score"
-                        android:textColor="@color/colorBlack" />
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/collapsing_nutri_score_image"
@@ -131,10 +142,10 @@
                     android:id="@+id/ingredients_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
                     android:layout_below="@id/linear_nutri_score"
                     android:text="@string/ingredients"
-                    android:textColor="@color/colorBlack" />
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/collapsing_ingredients"

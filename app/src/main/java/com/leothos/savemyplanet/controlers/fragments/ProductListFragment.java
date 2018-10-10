@@ -292,6 +292,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         RelativeLayout container = v.findViewById(R.id.item_container_collapser);
         TextView ingredients = v.findViewById(R.id.collapsing_ingredients);
         ImageView nutriScore = v.findViewById(R.id.collapsing_nutri_score_image);
+        ImageView arrow = v.findViewById(R.id.arrow_icon);
         //Set widgets
         ingredients.setText(mAdapter.getSingleProduct(position).getIngredients());
         nutriScore.setImageResource(BusinessLogic.getNutriScore(mAdapter.getSingleProduct(position).getScoreGrade(),
@@ -303,11 +304,13 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         //Handle animation
         if (container.isShown()) {
             container.startAnimation(animationUp);
-            //Necessary to avoid wrong animationUp behavior
             this.addCountDownTimer(container);
+            arrow.setRotation(0);
+
         } else {
             container.setVisibility(View.VISIBLE);
             container.startAnimation(animationDown);
+            arrow.setRotation(90);
         }
     }
 
@@ -336,6 +339,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         animationDown = AnimationUtils.loadAnimation(getContext(), R.anim.slide_down);
     }
 
+    //Necessary to avoid wrong animationUp behavior
     private void addCountDownTimer(View v) {
         CountDownTimer countDownTimerStatic = new CountDownTimer(COUNTDOWN_RUNNING_TIME, 16) {
             @Override
