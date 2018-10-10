@@ -26,7 +26,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorAccent"
+            android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/ToolbarTheme"
             app:layout_scrollFlags="scroll|enterAlways"
@@ -64,7 +64,7 @@
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorGrey"
+            android:background="@color/colorSoftGrey"
             android:visibility="visible">
 
             <RelativeLayout

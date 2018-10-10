@@ -16,12 +16,10 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="20dp"
-            android:background="@drawable/custom_round_shape"
             android:button="@drawable/custom_checkbox"
             android:checked="false"
             android:elevation="5dp"
-            android:onClick="onCheckboxClicked"
-             />
+            android:onClick="onCheckboxClicked" />
 
 
         <View
