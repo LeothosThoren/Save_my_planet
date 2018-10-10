@@ -33,7 +33,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controlers.activities.ResponseActivity">
+        <activity android:name=".controlers.activities.DetailProductActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".controlers.activities.MainActivity" />

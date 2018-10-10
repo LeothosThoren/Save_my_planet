@@ -35,7 +35,7 @@ import com.leothos.savemyplanet.R;
 import com.leothos.savemyplanet.ViewModel.ProductViewModel;
 import com.leothos.savemyplanet.api.StreamApi;
 import com.leothos.savemyplanet.controlers.fragments.DisplayImageBigSize;
-import com.leothos.savemyplanet.databinding.ActivityResponseBinding;
+import com.leothos.savemyplanet.databinding.ActivityDetailProductBinding;
 import com.leothos.savemyplanet.entities.MyProduct;
 import com.leothos.savemyplanet.injections.Injection;
 import com.leothos.savemyplanet.injections.ViewModelFactory;
@@ -53,14 +53,14 @@ import static com.leothos.savemyplanet.controlers.activities.BarcodeCaptureActiv
  * Main activity demonstrating how to pass extra parameters to an activity that
  * reads barcodes.
  */
-public class ResponseActivity extends AppCompatActivity {
+public class DetailProductActivity extends AppCompatActivity {
 
     // Constant
     public static final String CUSTOM_DIALOG_IMAGE = "CUSTOM_DIALOG_IMAGE";
     public static final String BUNDLE_KEY_RESPONSE = "BUNDLE_KEY";
-    private static final String TAG = ResponseActivity.class.getSimpleName();
+    private static final String TAG = DetailProductActivity.class.getSimpleName();
     // DataBinding
-    private ActivityResponseBinding mBinding;
+    private ActivityDetailProductBinding mBinding;
     // Var
     private OpenFoodFact mOpenFoodFact = new OpenFoodFact();
     private Disposable mDisposable;
@@ -71,7 +71,7 @@ public class ResponseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_response);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_detail_product);
 
         this.init();
     }
@@ -145,7 +145,7 @@ public class ResponseActivity extends AppCompatActivity {
                     @Override
                     public void onError(Throwable e) {
                         Log.e(TAG, "onError: " + e.getMessage());
-                        Toast.makeText(ResponseActivity.this, "An error occurred! Please check your connectivity...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DetailProductActivity.this, "An error occurred! Please check your connectivity...", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

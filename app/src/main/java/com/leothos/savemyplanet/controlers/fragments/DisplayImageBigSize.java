@@ -15,7 +15,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.leothos.savemyplanet.R;
 import com.leothos.savemyplanet.databinding.FragmentDisplayImageBigSizeBinding;
 
-import static com.leothos.savemyplanet.controlers.activities.ResponseActivity.BUNDLE_KEY_RESPONSE;
+import static com.leothos.savemyplanet.controlers.activities.DetailProductActivity.BUNDLE_KEY_RESPONSE;
 
 /**
  * A simple {@link Fragment} subclass.

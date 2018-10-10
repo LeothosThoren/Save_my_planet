@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -20,13 +21,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.AnticipateOvershootInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.leothos.savemyplanet.R;
@@ -35,6 +39,7 @@ import com.leothos.savemyplanet.adapters.MyProductAdapter;
 import com.leothos.savemyplanet.entities.MyProduct;
 import com.leothos.savemyplanet.injections.Injection;
 import com.leothos.savemyplanet.injections.ViewModelFactory;
+import com.leothos.savemyplanet.utils.BusinessLogic;
 import com.leothos.savemyplanet.utils.ItemClickSupport;
 
 import java.util.List;
@@ -49,6 +54,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
     public static final String CUSTOM_DIALOG_IMAGE = "CUSTOM_DIALOG_IMAGE";
     public static final String BUNDLE_KEY_RESPONSE = "BUNDLE_KEY";
     private static final String TAG = "ProductListFragment";
+    private static final long COUNTDOWN_RUNNING_TIME = 500;
     // Constant
     private static Integer INDICATOR_MIN = -1;
     private static Integer INDICATOR_MAX = 3;
@@ -73,11 +79,14 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
     RadioButton mRadioWithout;
     @BindView(R.id.frag_swipe_layout)
     SwipeRefreshLayout mRefreshLayout;
-    MenuItem exit;
-    MenuItem search;
+    private MenuItem exit;
+    private MenuItem search;
     // Var
     private ProductViewModel mProductViewModel;
     private MyProductAdapter mAdapter;
+    // Anim
+    private Animation animationUp;
+    private Animation animationDown;
 
 
     public ProductListFragment() {
@@ -108,6 +117,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         this.mValidatorSearch.setOnClickListener(v -> this.clickOnValidatorButton());
         this.mRadioWith.setOnClickListener(this);
         this.mRadioWithout.setOnClickListener(this);
+        this.initAnimation();
 
     }
 
@@ -180,21 +190,14 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
     private void recyclerViewItemClickHandler() {
         ItemClickSupport.addTo(mRecyclerView, R.layout.fragment_products_item)
                 .setOnItemClickListener((recyclerView, position, v) -> {
-                    Toast.makeText(getContext(), "Click on position: " + position, Toast.LENGTH_SHORT).show();
-                    //TODO
-                    TextView tv = v.findViewById(R.id.test_animation);
-                    tv.setText(mAdapter.getSingleProduct(position).getCategory());
-                    if (tv.isShown()) {
-                        tv.setVisibility(View.GONE);
-                    } else {
-                        tv.setVisibility(View.VISIBLE);
-                    }
+
+                    this.collapseDetailProduct(v, position);
                 });
     }
 
     @Override
     public void onPictureClicked(int position) {
-        Log.d(TAG, "onPictureClicked: ok "+ position);
+        Log.d(TAG, "onPictureClicked: ok " + position);
         this.openCustomImageResizer(mAdapter.getSingleProduct(position).getUrlPicture());
     }
 
@@ -285,6 +288,29 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
 
     }
 
+    private void collapseDetailProduct(View v, int position) {
+        RelativeLayout container = v.findViewById(R.id.item_container_collapser);
+        TextView ingredients = v.findViewById(R.id.collapsing_ingredients);
+        ImageView nutriScore = v.findViewById(R.id.collapsing_nutri_score_image);
+        //Set widgets
+        ingredients.setText(mAdapter.getSingleProduct(position).getIngredients());
+        nutriScore.setImageResource(BusinessLogic.getNutriScore(mAdapter.getSingleProduct(position).getScoreGrade(),
+                R.drawable.nutriscore_a,
+                R.drawable.nutriscore_b,
+                R.drawable.nutriscore_c,
+                R.drawable.nutriscore_d,
+                R.drawable.nutriscore_e));
+        //Handle animation
+        if (container.isShown()) {
+            container.startAnimation(animationUp);
+            //Necessary to avoid wrong animationUp behavior
+            this.addCountDownTimer(container);
+        } else {
+            container.setVisibility(View.VISIBLE);
+            container.startAnimation(animationDown);
+        }
+    }
+
     // -------------
     // Animation
     // -------------
@@ -305,4 +331,22 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         this.resetSearchWidgetValues();
     }
 
+    private void initAnimation() {
+        animationUp = AnimationUtils.loadAnimation(getContext(), R.anim.slide_up);
+        animationDown = AnimationUtils.loadAnimation(getContext(), R.anim.slide_down);
+    }
+
+    private void addCountDownTimer(View v) {
+        CountDownTimer countDownTimerStatic = new CountDownTimer(COUNTDOWN_RUNNING_TIME, 16) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+            }
+
+            @Override
+            public void onFinish() {
+               v.setVisibility(View.GONE);
+            }
+        };
+        countDownTimerStatic.start();
+    }
 }

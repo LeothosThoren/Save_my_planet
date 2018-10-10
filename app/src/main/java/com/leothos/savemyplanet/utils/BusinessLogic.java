@@ -40,5 +40,15 @@ public class BusinessLogic {
         return hashMap.get(score) != null ? hashMap.get(score) : e;
     }
 
+    public static Integer getNutriScore(String score, Integer a, Integer b, Integer c, Integer d, Integer e) {
+        HashMap<String, Integer> hashMap = new HashMap<>();
+        hashMap.put("a", a);
+        hashMap.put("b", b);
+        hashMap.put("c", c);
+        hashMap.put("d", d);
+        hashMap.put("e", e);
+
+        return hashMap.get(score) != null ? hashMap.get(score) : e;
+    }
 
 }

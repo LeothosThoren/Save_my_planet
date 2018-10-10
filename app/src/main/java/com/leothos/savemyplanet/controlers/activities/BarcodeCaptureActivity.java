@@ -323,7 +323,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity implements B
         //do something with barcode data returned
         Log.d(TAG, "onBarcodeDetected: " + barcode.displayValue);
         if (barcode.displayValue != null && (barcode.format == EAN_13 || barcode.format == EAN_8)) {
-            Intent i = new Intent(this, ResponseActivity.class);
+            Intent i = new Intent(this, DetailProductActivity.class);
             i.putExtra(BarcodeObject, barcode.displayValue);
             startActivity(i);
         } else {
