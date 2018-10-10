@@ -32,6 +32,7 @@ public class DisplayImageBigSize extends DialogFragment {
         View view = mBinding.getRoot();
         // Retrieve data
         String url = getArguments() != null ? getArguments().getString(BUNDLE_KEY_RESPONSE) : null;
+
         mBinding.closeButton.setOnClickListener(v -> getDialog().dismiss());
         Glide.with(this).load(url).apply(RequestOptions.centerCropTransform()).into(mBinding.bigSizeImage);
 

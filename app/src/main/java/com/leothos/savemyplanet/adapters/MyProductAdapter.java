@@ -18,11 +18,13 @@ import java.util.List;
 public class MyProductAdapter extends RecyclerView.Adapter<MyProductViewHolder> {
 
     private List<MyProduct> mProductList;
-    private RequestManager glide;
+    private RequestManager mGlide;
+   private Listener mListener;
 
-    public MyProductAdapter(RequestManager glide) {
+    public MyProductAdapter(RequestManager glide, Listener listener) {
         this.mProductList = new ArrayList<>();
-        this.glide = glide;
+        this.mGlide = glide;
+        this.mListener = listener;
     }
 
     @NonNull
@@ -37,7 +39,7 @@ public class MyProductAdapter extends RecyclerView.Adapter<MyProductViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull MyProductViewHolder myProductViewHolder, int position) {
-        myProductViewHolder.updateProductItem(this.mProductList.get(position), this.glide);
+        myProductViewHolder.updateProductItem(this.mProductList.get(position), this.mGlide, this.mListener);
     }
 
     @Override
@@ -53,5 +55,10 @@ public class MyProductAdapter extends RecyclerView.Adapter<MyProductViewHolder> 
     public void updateData(List<MyProduct> productList) {
         this.mProductList = productList;
         this.notifyDataSetChanged();
+    }
+
+    // Interface
+    public interface Listener {
+        void onPictureClicked(int position);
     }
 }

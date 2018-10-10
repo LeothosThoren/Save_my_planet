@@ -58,7 +58,6 @@ public class ResponseActivity extends AppCompatActivity {
     // Constant
     public static final String CUSTOM_DIALOG_IMAGE = "CUSTOM_DIALOG_IMAGE";
     public static final String BUNDLE_KEY_RESPONSE = "BUNDLE_KEY";
-    //    private static final int RC_BARCODE_CAPTURE = 9001;
     private static final String TAG = ResponseActivity.class.getSimpleName();
     // DataBinding
     private ActivityResponseBinding mBinding;
@@ -202,11 +201,13 @@ public class ResponseActivity extends AppCompatActivity {
                         mOpenFoodFact.getProduct().getIngredientsFromPalmOilN() : -1,
                 mOpenFoodFact.getProduct().getNutritionGrades() != null ?
                         mOpenFoodFact.getProduct().getNutritionGrades() : getString(R.string.not_specified),
+                mOpenFoodFact.getProduct().getIngredientsTextFr() != null ?
+                        mOpenFoodFact.getProduct().getIngredientsTextFr() : getString(R.string.not_specified),
                 Calendar.getInstance().getTime(),
                 mOpenFoodFact.getCode());
 
         mProductViewModel.insertProduct(products);
-        Toast.makeText(this, "Product saved!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.product_saved, Toast.LENGTH_SHORT).show();
     }
 
     // -------------

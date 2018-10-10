@@ -43,5 +43,6 @@
     <string name="petitions">Petitions</string>
     <string name="not_specified">Not specified</string>
     <string name="url_resource">https://www.freeiconspng.com/uploads/no-image-icon-15.png</string>
+    <string name="product_saved">Product saved!</string>
 
 </resources>

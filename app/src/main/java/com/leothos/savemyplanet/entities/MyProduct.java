@@ -10,21 +10,23 @@ import java.util.Date;
 public class MyProduct {
 
     @PrimaryKey
-    @NonNull private String codeId;
+    @NonNull
+    private String codeId;
     private String productName;
     private String productBrand;
     private String category;
     private String quantity;
     private Integer palmOilIndicator;
     private String scoreGrade;
+    private String ingredients;
     private String urlPicture;
     private Date timestamp;
 
     public MyProduct() {
     }
 
-    public MyProduct(String productName, String productBrand, String category, String urlPicture,
-                     String quantity, Integer palmOilIndicator, String scoreGrade, Date timestamp, @NonNull String codeId) {
+    public MyProduct(String productName, String productBrand, String category, String urlPicture, String quantity,
+                     Integer palmOilIndicator, String scoreGrade, String ingredients, Date timestamp, @NonNull String codeId) {
         this.codeId = codeId;
         this.productName = productName;
         this.productBrand = productBrand;
@@ -32,6 +34,7 @@ public class MyProduct {
         this.quantity = quantity;
         this.palmOilIndicator = palmOilIndicator;
         this.scoreGrade = scoreGrade;
+        this.ingredients = ingredients;
         this.timestamp = timestamp;
         this.urlPicture = urlPicture;
     }
@@ -91,6 +94,14 @@ public class MyProduct {
 
     public void setScoreGrade(String scoreGrade) {
         this.scoreGrade = scoreGrade;
+    }
+
+    public String getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
     }
 
     public Date getTimestamp() {

@@ -9,12 +9,15 @@ import android.widget.TextView;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
 import com.leothos.savemyplanet.R;
+import com.leothos.savemyplanet.adapters.MyProductAdapter;
 import com.leothos.savemyplanet.entities.MyProduct;
+
+import java.lang.ref.WeakReference;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MyProductViewHolder extends RecyclerView.ViewHolder {
+public class MyProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     @BindView(R.id.item_product_name)
     TextView productName;
@@ -26,6 +29,7 @@ public class MyProductViewHolder extends RecyclerView.ViewHolder {
     TextView productQuality;
     @BindView(R.id.item_product_picture)
     ImageView productPicture;
+    private WeakReference<MyProductAdapter.Listener> mListenerWeakReference;
 
     public MyProductViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -33,7 +37,7 @@ public class MyProductViewHolder extends RecyclerView.ViewHolder {
     }
 
 
-    public void updateProductItem(MyProduct myProduct, RequestManager glide) {
+    public void updateProductItem(MyProduct myProduct, RequestManager glide, MyProductAdapter.Listener listener) {
         this.productName.setText(myProduct.getProductName());
         this.productBrand.setText(myProduct.getProductBrand());
         this.productQuantity.setText(myProduct.getQuantity());
@@ -60,5 +64,15 @@ public class MyProductViewHolder extends RecyclerView.ViewHolder {
                 break;
         }
 
+        // Handle click on picture
+        this.productPicture.setOnClickListener(this);
+        this.mListenerWeakReference = new WeakReference<>(listener);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        MyProductAdapter.Listener callback = mListenerWeakReference.get();
+        if (callback != null) callback.onPictureClicked(getAdapterPosition());
     }
 }

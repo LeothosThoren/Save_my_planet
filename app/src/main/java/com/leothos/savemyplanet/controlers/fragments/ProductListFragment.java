@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +20,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.animation.AnticipateOvershootInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -44,8 +44,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class ProductListFragment extends Fragment implements View.OnClickListener {
+public class ProductListFragment extends Fragment implements View.OnClickListener, MyProductAdapter.Listener {
 
+    public static final String CUSTOM_DIALOG_IMAGE = "CUSTOM_DIALOG_IMAGE";
+    public static final String BUNDLE_KEY_RESPONSE = "BUNDLE_KEY";
+    private static final String TAG = "ProductListFragment";
     // Constant
     private static Integer INDICATOR_MIN = -1;
     private static Integer INDICATOR_MAX = 3;
@@ -75,6 +78,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
     // Var
     private ProductViewModel mProductViewModel;
     private MyProductAdapter mAdapter;
+
 
     public ProductListFragment() {
     }
@@ -117,7 +121,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
     }
 
     private void configureRecyclerView() {
-        this.mAdapter = new MyProductAdapter(Glide.with(this));
+        this.mAdapter = new MyProductAdapter(Glide.with(this), this);
         this.mRecyclerView.setAdapter(mAdapter);
         this.mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         this.recyclerViewItemClickHandler();
@@ -178,17 +182,29 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
                 .setOnItemClickListener((recyclerView, position, v) -> {
                     Toast.makeText(getContext(), "Click on position: " + position, Toast.LENGTH_SHORT).show();
                     //TODO
+                    TextView tv = v.findViewById(R.id.test_animation);
+                    tv.setText(mAdapter.getSingleProduct(position).getCategory());
+                    if (tv.isShown()) {
+                        tv.setVisibility(View.GONE);
+                    } else {
+                        tv.setVisibility(View.VISIBLE);
+                    }
                 });
     }
 
+    @Override
+    public void onPictureClicked(int position) {
+        Log.d(TAG, "onPictureClicked: ok "+ position);
+        this.openCustomImageResizer(mAdapter.getSingleProduct(position).getUrlPicture());
+    }
 
+    // When the search dialog layout is visible
     private void clickOnValidatorButton() {
         //launch request
         this.handleSearchQuery();
-        //hide the view
+        //hide the views
         this.exitAnimation();
         this.closeKeyboard();
-        //hide exit button
         this.exit.setVisible(false);
     }
 
@@ -257,6 +273,18 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         this.mRefreshLayout.setOnRefreshListener(this::getProductList);
     }
 
+    private void openCustomImageResizer(String url) {
+        DisplayImageBigSize imageBigSize = new DisplayImageBigSize();
+        Bundle args = new Bundle();
+        args.putString(BUNDLE_KEY_RESPONSE, url);
+        imageBigSize.setArguments(args);
+        imageBigSize.setStyle(DialogFragment.STYLE_NO_TITLE, DialogFragment.STYLE_NO_INPUT);
+        if (getFragmentManager() != null) {
+            imageBigSize.show(getFragmentManager(), CUSTOM_DIALOG_IMAGE);
+        }
+
+    }
+
     // -------------
     // Animation
     // -------------
@@ -276,6 +304,5 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         //To clear all values
         this.resetSearchWidgetValues();
     }
-
 
 }
