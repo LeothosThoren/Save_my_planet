@@ -86,6 +86,7 @@ public class WebViewDialog extends DialogFragment implements JsInterface {
     // Ui
     // ----------
 
+    //WebView Configuration
     @SuppressLint("SetJavaScriptEnabled")
     private void webViewPlayer(final String uri, final String js) {
         mWebViewBinding.webView.setWebViewClient(new WebViewClient() {

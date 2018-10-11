@@ -26,13 +26,13 @@ public class MyProductDaoTest {
     // DATA SET FOR TEST
     private static MyProduct NEW_PRODUCT0 = new MyProduct("Nutella", "Ferreo", "Pâte à tartiner",
             "https://static.openfoodfacts.org/images/products/301/762/040/1473/front_fr.20.400.jpg",
-            "1kg",1, "d", Calendar.getInstance().getTime(), "3017620401473");
+            "1kg",1, "d", "ingrédients", Calendar.getInstance().getTime(), "3017620401473");
     private static MyProduct NEW_PRODUCT1 = new MyProduct("Gazpacho", "Alvalle", "Soupe froide",
             "https://static.openfoodfacts.org/images/products/301/762/040/1473/front_fr.20.400.jpg",
-            "1L",0, "b", Calendar.getInstance().getTime(), "3017620401783");
+            "1L",0, "b", "ingrédients",Calendar.getInstance().getTime(), "3017620401783");
     private static MyProduct NEW_PRODUCT2 = new MyProduct("Les ficelles", "Kambly", "Apéritif",
             "https://static.openfoodfacts.org/images/products/301/762/040/1473/front_fr.20.400.jpg",
-            "100g",2, "e", Calendar.getInstance().getTime(), "30171240401473");
+            "100g",2, "e", "ingrédients",Calendar.getInstance().getTime(), "30171240401473");
 
     @Rule
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();

@@ -30,7 +30,7 @@
     <string name="product_picture">Photo produit</string>
     <string name="close_window">Fermer la page</string>
     <string name="brand">Marque</string>
-    <string name="separation">Séparation</string>
+    <string name="separation">&#160;-&#160;</string>
     <string name="quantity">Quantité</string>
     <string name="quality">Qualité</string>
     <string name="product_name">Nom du produit</string>

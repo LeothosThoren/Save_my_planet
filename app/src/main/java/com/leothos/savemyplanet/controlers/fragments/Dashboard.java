@@ -109,6 +109,7 @@ public class Dashboard extends Fragment implements KenBurnsView.TransitionListen
 
     }
 
+    //Handle the switch between the image
     @Override
     public void onTransitionEnd(Transition transition) {
         mTransitionsCount++;

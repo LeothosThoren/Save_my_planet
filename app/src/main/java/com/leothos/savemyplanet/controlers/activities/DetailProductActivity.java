@@ -221,6 +221,7 @@ public class DetailProductActivity extends AppCompatActivity {
 
     private void updateUiOnStopHttpRequest(int status) {
         if (status == 0) {
+            //Display message error
             mBinding.progressBar.setVisibility(View.GONE);
             mBinding.noFoundImage.setVisibility(View.VISIBLE);
             Snackbar.make(findViewById(R.id.coordinator), R.string.product_no_found,
@@ -229,6 +230,7 @@ public class DetailProductActivity extends AppCompatActivity {
                     .setActionTextColor(Color.GREEN)
                     .show();
         } else {
+            //Show detail product
             mBinding.cardviewLayout.setVisibility(View.GONE);
             mBinding.scrollView.setVisibility(View.VISIBLE);
             mBinding.productPicture.setOnClickListener(v -> this.openCustomImageResizerDialog());

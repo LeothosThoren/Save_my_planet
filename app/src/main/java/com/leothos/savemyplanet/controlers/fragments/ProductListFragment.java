@@ -288,6 +288,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
 
     }
 
+    //Animation to show the productd detail in recycler view
     private void collapseDetailProduct(View v, int position) {
         RelativeLayout container = v.findViewById(R.id.item_container_collapser);
         TextView ingredients = v.findViewById(R.id.collapsing_ingredients);
@@ -301,7 +302,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
                 R.drawable.nutriscore_c,
                 R.drawable.nutriscore_d,
                 R.drawable.nutriscore_e));
-        //Handle animation
+        //Handle animations
         if (container.isShown()) {
             container.startAnimation(animationUp);
             this.addCountDownTimer(container);
@@ -320,7 +321,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
 
     private void entryAnimation() {
         ObjectAnimator animator = ObjectAnimator.ofFloat(mCardView, View.TRANSLATION_X, mCardView.getWidth(), 0);
-        animator.setDuration(800);
+        animator.setDuration(700);
         animator.setInterpolator(new AnticipateOvershootInterpolator());
         animator.start();
     }
@@ -345,7 +346,6 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
             @Override
             public void onTick(long millisUntilFinished) {
             }
-
             @Override
             public void onFinish() {
                v.setVisibility(View.GONE);
