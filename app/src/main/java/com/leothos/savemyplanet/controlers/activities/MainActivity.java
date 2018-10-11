@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        this.configureBottomNavigationView();
+        int id = getIntent().getIntExtra(INTENT_PUT_EXTRA, 0);
+        this.configureBottomNavigationView(id);
 
     }
 
@@ -52,11 +52,11 @@ public class MainActivity extends AppCompatActivity {
     // Configuration
     // --------------
 
-    private void configureBottomNavigationView() {
+    private void configureBottomNavigationView(int id) {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         Menu menu = navigation.getMenu();
-        int id = getIntent().getIntExtra(INTENT_PUT_EXTRA, 0);
+
         if (id == HOME_ID) {
             this.configureFragmentContent(new Dashboard());
         } else if (id == HISTORY_ID) {

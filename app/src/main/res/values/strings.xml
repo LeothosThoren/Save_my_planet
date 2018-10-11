@@ -47,5 +47,6 @@
     <string name="dismiss">Dismiss</string>
     <string name="go_back">Return</string>
     <string name="product_detail">Product detail</string>
+    <string name="unable_to_start_camera_source">Unable to start camera source.</string>
 
 </resources>

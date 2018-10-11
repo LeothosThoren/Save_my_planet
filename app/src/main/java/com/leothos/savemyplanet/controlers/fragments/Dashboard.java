@@ -98,9 +98,6 @@ public class Dashboard extends Fragment implements KenBurnsView.TransitionListen
 
     private void openYoutubeView() {
         YouTubeDialog youTubeDialog = new YouTubeDialog();
-//        Bundle bundle = new Bundle();
-//        bundle.putInt(BUNDLE_INT, id);
-//        youTubeDialog.setArguments(bundle);
         youTubeDialog.setStyle(android.app.DialogFragment.STYLE_NO_TITLE, R.style.Dialog_FullScreen);
         if (getFragmentManager() != null) {
             youTubeDialog.show(getFragmentManager(), YOUTUBE_DIALOG);

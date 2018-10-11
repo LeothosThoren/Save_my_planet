@@ -296,7 +296,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity implements B
             try {
                 mPreview.start(mCameraSource, mGraphicOverlay);
             } catch (IOException e) {
-                Log.e(TAG, "Unable to start camera source.", e);
+                Log.e(TAG, getString(R.string.unable_to_start_camera_source), e);
                 mCameraSource.release();
                 mCameraSource = null;
             }
