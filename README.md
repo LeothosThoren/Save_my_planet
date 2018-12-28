@@ -8,12 +8,12 @@ Thus the __*Save My Planet*__ application (which is inspired by [Yuka](https://y
 to change their habits.
 
 ## Screenshots
-<img src="https://github.com/LeothosThoren/Save_my_planet/blob/master/img/home.png" align="left" height="240" width="160">
-<img src="https://github.com/LeothosThoren/Save_my_planet/blob/master/img/scanner.png" align="left" height="240" width="160">
-<img src="https://github.com/LeothosThoren/Save_my_planet/blob/master/img/history.png" align="left" height="240" width="160">
-<img src="https://github.com/LeothosThoren/Save_my_planet/blob/master/img/detail.png" align="left" height="240" width="160">
-<img src="https://github.com/LeothosThoren/Save_my_planet/blob/master/img/webview.png" align="left" height="240" width="160">
-
+<img src="https://github.com/LeothosThoren/Save_my_planet/blob/master/img/home.png" align="left" height="360" width="240">
+<img src="https://github.com/LeothosThoren/Save_my_planet/blob/master/img/scanner.png" align="left" height="360" width="240">
+<img src="https://github.com/LeothosThoren/Save_my_planet/blob/master/img/history.png" align="left" height="360" width="240">
+<img src="https://github.com/LeothosThoren/Save_my_planet/blob/master/img/detail.png" align="left" height="360" width="240">
+<img src="https://github.com/LeothosThoren/Save_my_planet/blob/master/img/webview.png" align="left" height="360" width="240">
+<br/>;
 ## Prerequisites
 - Android Studio 3.x
 - The latest SDK with at least Android Kitkat 4.4 (API 19)
