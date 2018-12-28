@@ -16,20 +16,6 @@ to change their habits.
 <img src="https://github.com/LeothosThoren/Save_my_planet/blob/master/img/webview.png" height="360" width="240">
 </div>
 
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-
-
-
-
-
-
 ## Prerequisites
 - Android Studio 3.x
 - The latest SDK with at least Android Kitkat 4.4 (API 19)
