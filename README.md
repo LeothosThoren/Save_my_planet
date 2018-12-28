@@ -8,11 +8,11 @@ Thus the __*Save My Planet*__ application (which is inspired by [Yuka](https://y
 to change their habits.
 
 ## Screenshots
-![home](https://github.com/LeothosThoren/Save_my_planet/blob/master/img/home.png)
-![scanner](https://github.com/LeothosThoren/Save_my_planet/blob/master/img/scanner.png)
-![history](https://github.com/LeothosThoren/Save_my_planet/blob/master/img/history.png)
-![detail](https://github.com/LeothosThoren/Save_my_planet/blob/master/img/detail.png)
-![webview](https://github.com/LeothosThoren/Save_my_planet/blob/master/img/webview.png)
+![home](https://github.com/LeothosThoren/Save_my_planet/blob/master/img/home.png)|
+![scanner](https://github.com/LeothosThoren/Save_my_planet/blob/master/img/scanner.png)|
+![history](https://github.com/LeothosThoren/Save_my_planet/blob/master/img/history.png)|
+![detail](https://github.com/LeothosThoren/Save_my_planet/blob/master/img/detail.png)|
+![webview](https://github.com/LeothosThoren/Save_my_planet/blob/master/img/webview.png)|
 
 ## Prerequisites
 - Android Studio 3.x
