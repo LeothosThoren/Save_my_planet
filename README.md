@@ -9,11 +9,11 @@ to change their habits.
 
 ## Screenshots
 <div align="center">
-<img src="https://github.com/LeothosThoren/Save_my_planet/blob/master/img/home.png" align="left" height="360" width="240">
-<img src="https://github.com/LeothosThoren/Save_my_planet/blob/master/img/scanner.png" align="left" height="360" width="240">
-<img src="https://github.com/LeothosThoren/Save_my_planet/blob/master/img/history.png" align="left" height="360" width="240">
-<img src="https://github.com/LeothosThoren/Save_my_planet/blob/master/img/detail.png" align="left" height="360" width="240">
-<img src="https://github.com/LeothosThoren/Save_my_planet/blob/master/img/webview.png" align="left" height="360" width="240">
+<img src="https://github.com/LeothosThoren/Save_my_planet/blob/master/img/home.png" height="360" width="240">
+<img src="https://github.com/LeothosThoren/Save_my_planet/blob/master/img/scanner.png" height="360" width="240">
+<img src="https://github.com/LeothosThoren/Save_my_planet/blob/master/img/history.png" height="360" width="240">
+<img src="https://github.com/LeothosThoren/Save_my_planet/blob/master/img/detail.png" height="360" width="240">
+<img src="https://github.com/LeothosThoren/Save_my_planet/blob/master/img/webview.png" height="360" width="240">
 </div>
 
 <br/>
