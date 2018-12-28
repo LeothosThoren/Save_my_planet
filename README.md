@@ -8,11 +8,11 @@ Thus the __*Save My Planet*__ application (which is inspired by [Yuka](https://y
 to change their habits.
 
 ## Screenshots
-![home](https://github.com/LeothosThoren/Save_my_planet/blob/master/img/home.png = 160x240)
-![scanner](https://github.com/LeothosThoren/Save_my_planet/blob/master/img/scanner.png = 160x240)
-![history](https://github.com/LeothosThoren/Save_my_planet/blob/master/img/history.png = 160x240)
-![detail](https://github.com/LeothosThoren/Save_my_planet/blob/master/img/detail.png = 160x240)
-![webview](https://github.com/LeothosThoren/Save_my_planet/blob/master/img/webview.png = 160x240)
+<img src="https://github.com/LeothosThoren/Save_my_planet/blob/master/img/home.png" align="left" height="240" width="160">
+<img src="https://github.com/LeothosThoren/Save_my_planet/blob/master/img/scanner.png" align="left" height="240" width="160">
+<img src="https://github.com/LeothosThoren/Save_my_planet/blob/master/img/history.png" align="left" height="240" width="160">
+<img src="https://github.com/LeothosThoren/Save_my_planet/blob/master/img/detail.png" align="left" height="240" width="160">
+<img src="https://github.com/LeothosThoren/Save_my_planet/blob/master/img/webview.png" align="left" height="240" width="160">
 
 ## Prerequisites
 - Android Studio 3.x
