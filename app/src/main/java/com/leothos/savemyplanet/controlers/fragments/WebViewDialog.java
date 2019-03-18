@@ -48,10 +48,10 @@ public class WebViewDialog extends DialogFragment implements JsInterface {
     @Override
     public void onResume() {
         if (getDialog().getWindow() != null) {
-            ViewGroup.LayoutParams params = getDialog().getWindow().getAttributes();
+            WindowManager.LayoutParams params = getDialog().getWindow().getAttributes();
             params.width = WindowManager.LayoutParams.MATCH_PARENT;
             params.height = WindowManager.LayoutParams.MATCH_PARENT;
-            getDialog().getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
+            getDialog().getWindow().setAttributes(params);
         }
         super.onResume();
     }

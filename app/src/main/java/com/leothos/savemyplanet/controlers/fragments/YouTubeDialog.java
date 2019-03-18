@@ -73,10 +73,10 @@ public class YouTubeDialog extends DialogFragment implements YouTubePlayer.OnIni
     public void onResume() {
         if (getDialog().getWindow() != null) {
             // Handle dialog screen size
-            ViewGroup.LayoutParams params = getDialog().getWindow().getAttributes();
+            WindowManager.LayoutParams params = getDialog().getWindow().getAttributes();
             params.width = WindowManager.LayoutParams.MATCH_PARENT;
             params.height = WindowManager.LayoutParams.MATCH_PARENT;
-            getDialog().getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
+            getDialog().getWindow().setAttributes(params);
         }
         super.onResume();
     }

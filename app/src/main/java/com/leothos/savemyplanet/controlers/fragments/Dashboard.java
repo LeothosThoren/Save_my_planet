@@ -4,6 +4,8 @@ package com.leothos.savemyplanet.controlers.fragments;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -90,7 +92,7 @@ public class Dashboard extends Fragment implements KenBurnsView.TransitionListen
         Bundle bundle = new Bundle();
         bundle.putInt(BUNDLE_INT, id);
         dialog.setArguments(bundle);
-        dialog.setStyle(android.app.DialogFragment.STYLE_NO_TITLE, R.style.Dialog_FullScreen);
+        dialog.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.Dialog_FullScreen);
         if (getFragmentManager() != null) {
             dialog.show(getFragmentManager(), WEB_VIEW_DIALOG);
         }
@@ -98,7 +100,7 @@ public class Dashboard extends Fragment implements KenBurnsView.TransitionListen
 
     private void openYoutubeView() {
         YouTubeDialog youTubeDialog = new YouTubeDialog();
-        youTubeDialog.setStyle(android.app.DialogFragment.STYLE_NO_TITLE, R.style.Dialog_FullScreen);
+        youTubeDialog.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.Dialog_FullScreen);
         if (getFragmentManager() != null) {
             youTubeDialog.show(getFragmentManager(), YOUTUBE_DIALOG);
         }

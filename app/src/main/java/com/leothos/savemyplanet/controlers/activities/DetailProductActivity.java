@@ -32,7 +32,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.leothos.savemyplanet.R;
-import com.leothos.savemyplanet.ViewModel.ProductViewModel;
+import com.leothos.savemyplanet.view_model.ProductViewModel;
 import com.leothos.savemyplanet.api.StreamApi;
 import com.leothos.savemyplanet.controlers.fragments.DisplayImageBigSize;
 import com.leothos.savemyplanet.databinding.ActivityDetailProductBinding;

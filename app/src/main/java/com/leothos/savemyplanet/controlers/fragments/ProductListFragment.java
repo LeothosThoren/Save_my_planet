@@ -34,7 +34,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.leothos.savemyplanet.R;
-import com.leothos.savemyplanet.ViewModel.ProductViewModel;
+import com.leothos.savemyplanet.view_model.ProductViewModel;
 import com.leothos.savemyplanet.adapters.MyProductAdapter;
 import com.leothos.savemyplanet.entities.MyProduct;
 import com.leothos.savemyplanet.injections.Injection;

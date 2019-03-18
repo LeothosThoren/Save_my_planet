@@ -36,7 +36,7 @@ to change their habits.
  - [x] Google [Youtube](https://developers.google.com/youtube/android/player/) for videos
 
 ## How to use ?
-If you want to try this app, you can click on this [link]() to download the .apk file.
+If you want to try this app, you can click on this [link](https://github.com/LeothosThoren/Save_my_planet/blob/master/apk/app-debug.apk) to download the .apk file.
 
 ## Credits
 Thanks to:

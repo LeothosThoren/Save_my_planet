@@ -4,7 +4,7 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
-import com.leothos.savemyplanet.ViewModel.ProductViewModel;
+import com.leothos.savemyplanet.view_model.ProductViewModel;
 import com.leothos.savemyplanet.repositories.MyProductDataRepository;
 
 import java.util.concurrent.Executor;
