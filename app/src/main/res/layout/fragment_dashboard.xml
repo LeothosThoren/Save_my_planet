@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,12 +15,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inAnimation="@android:anim/fade_in"
-            android:outAnimation="@android:anim/fade_out">
+            android:outAnimation="@android:anim/fade_out"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
             <!--External library-->
             <com.flaviofaria.kenburnsview.KenBurnsView
                 android:id="@+id/presentation1"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="wrap_content"
                 android:src="@drawable/family_apes" />
 
             <com.flaviofaria.kenburnsview.KenBurnsView
@@ -34,10 +38,16 @@
         <!--Grid Layout-->
         <android.support.v7.widget.GridLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_below="@id/viewSwitcher"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:padding="4dp"
             app:columnCount="2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewSwitcher"
             app:rowCount="2"
             app:useDefaultMargins="true">
 
@@ -192,5 +202,5 @@
 
         </android.support.v7.widget.GridLayout>
 
-    </RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
 </layout>

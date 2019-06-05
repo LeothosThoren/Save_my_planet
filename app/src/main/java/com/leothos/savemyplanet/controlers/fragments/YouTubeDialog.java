@@ -8,7 +8,6 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,9 +30,6 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class YouTubeDialog extends DialogFragment implements YouTubePlayer.OnInitializedListener {
 
 
@@ -95,7 +91,7 @@ public class YouTubeDialog extends DialogFragment implements YouTubePlayer.OnIni
     @Override
     public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult failure) {
         Log.d(TAG, "onInitializationFailure: Failed to initialize.");
-        Toast.makeText(getContext(), failure.toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), failure.toString(), Toast.LENGTH_SHORT).show();
     }
 
 
@@ -114,7 +110,7 @@ public class YouTubeDialog extends DialogFragment implements YouTubePlayer.OnIni
         if (!isGooglePlayServicesAvailable()) {
             acquireGooglePlayServices();
         } else if (!isDeviceOnline()) {
-            Toast.makeText(getContext(), "No network connection available.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "No network connection available.", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -126,7 +122,7 @@ public class YouTubeDialog extends DialogFragment implements YouTubePlayer.OnIni
      */
     private boolean isDeviceOnline() {
         ConnectivityManager connMgr =
-                (ConnectivityManager) Objects.requireNonNull(getContext()).getSystemService(Context.CONNECTIVITY_SERVICE);
+                (ConnectivityManager) Objects.requireNonNull(getActivity()).getSystemService(Context.CONNECTIVITY_SERVICE);
         assert connMgr != null;
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         return (networkInfo != null && networkInfo.isConnected());
@@ -142,7 +138,7 @@ public class YouTubeDialog extends DialogFragment implements YouTubePlayer.OnIni
         GoogleApiAvailability apiAvailability =
                 GoogleApiAvailability.getInstance();
         final int connectionStatusCode =
-                apiAvailability.isGooglePlayServicesAvailable(getContext());
+                apiAvailability.isGooglePlayServicesAvailable(getActivity());
         return connectionStatusCode == ConnectionResult.SUCCESS;
     }
 
@@ -154,7 +150,7 @@ public class YouTubeDialog extends DialogFragment implements YouTubePlayer.OnIni
         GoogleApiAvailability apiAvailability =
                 GoogleApiAvailability.getInstance();
         final int connectionStatusCode =
-                apiAvailability.isGooglePlayServicesAvailable(getContext());
+                apiAvailability.isGooglePlayServicesAvailable(getActivity());
         if (apiAvailability.isUserResolvableError(connectionStatusCode)) {
             showGooglePlayServicesAvailabilityErrorDialog(connectionStatusCode);
         }

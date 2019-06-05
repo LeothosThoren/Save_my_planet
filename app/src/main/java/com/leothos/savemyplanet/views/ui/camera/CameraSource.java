@@ -18,6 +18,7 @@ package com.leothos.savemyplanet.views.ui.camera;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.Application;
 import android.content.Context;
 import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
@@ -29,6 +30,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
 import android.support.annotation.StringDef;
 import android.util.Log;
+import android.view.Display;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -133,8 +135,8 @@ public class CameraSource {
     // These values may be requested by the caller.  Due to hardware limitations, we may need to
     // select close, but not exactly the same values for these.
     private float mRequestedFps = 30.0f;
-    private int mRequestedPreviewWidth = 1024;
-    private int mRequestedPreviewHeight = 768;
+    private int mRequestedPreviewWidth = 1280;
+    private int mRequestedPreviewHeight = 1920;
 
 
     private String mFocusMode = null;
