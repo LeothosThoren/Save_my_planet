@@ -26,7 +26,7 @@ public class Dashboard extends Fragment implements KenBurnsView.TransitionListen
     public static final String WEB_VIEW_DIALOG = "com.leothos.savemyplanet.controlers.fragments.WebViewDialog";
     public static final String YOUTUBE_DIALOG = "com.leothos.savemyplanet.controlers.fragments.YouTubeDialog";
     public static final String BUNDLE_INT = "BUNDLE_INT";
-    private static final int TRANSITIONS_TO_SWITCH = 2;
+    private static final int TRANSITIONS_TO_SWITCH = 1;
     private static final String TAG = "Dashboard";
     // Var
     private int mTransitionsCount = 0;

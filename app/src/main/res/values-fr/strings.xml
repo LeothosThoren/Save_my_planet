@@ -49,4 +49,5 @@
     <string name="go_back">Retour</string>
     <string name="product_detail">Détail du produit</string>
     <string name="unable_to_start_camera_source">Impossible de démarrer la caméra.</string>
+    <string name="text_helper">"Placez le code barre à l'intérieur du carré blanc "</string>
 </resources>
