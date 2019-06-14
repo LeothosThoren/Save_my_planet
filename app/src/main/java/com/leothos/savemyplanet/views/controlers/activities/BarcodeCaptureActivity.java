@@ -242,7 +242,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity implements B
 
     /**
      * Callback for the result from requesting permissions. This method
-     * is invoked for every call on {@link #requestPermissions(String[], int)}.
+     * is invoked for every call on {link #requestPermissions(String[], int)}.
      */
     @Override
     public void onRequestPermissionsResult(int requestCode,

@@ -12,9 +12,15 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
+        debug {
+            buildConfigField 'String', "YoutubeApiKey", SAVE_MY_PLANET_YOUTUBE_API_KEY
+            resValue 'string', "youtube_api_key", SAVE_MY_PLANET_YOUTUBE_API_KEY
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', "YoutubeApiKey", SAVE_MY_PLANET_YOUTUBE_API_KEY
+            resValue 'string', "youtube_api_key", SAVE_MY_PLANET_YOUTUBE_API_KEY
         }
     }
     compileOptions {

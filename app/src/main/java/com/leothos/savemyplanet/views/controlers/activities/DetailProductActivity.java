@@ -112,6 +112,7 @@ public class DetailProductActivity extends AppCompatActivity {
             case R.id.menu_scan:
                 Intent i = new Intent(this, BarcodeCaptureActivity.class);
                 startActivity(i);
+                finish();
                 break;
         }
 

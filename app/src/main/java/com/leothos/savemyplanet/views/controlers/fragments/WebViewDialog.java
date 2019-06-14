@@ -48,7 +48,7 @@ public class WebViewDialog extends DialogFragment implements JsInterface {
         if (getDialog().getWindow() != null) {
             WindowManager.LayoutParams params = getDialog().getWindow().getAttributes();
             params.width = WindowManager.LayoutParams.MATCH_PARENT;
-            params.height = WindowManager.LayoutParams.MATCH_PARENT;
+            params.height = WindowManager.LayoutParams.WRAP_CONTENT;
             getDialog().getWindow().setAttributes(params);
         }
         super.onResume();

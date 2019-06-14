@@ -71,7 +71,7 @@ public class YouTubeDialog extends DialogFragment implements YouTubePlayer.OnIni
             // Handle dialog screen size
             WindowManager.LayoutParams params = getDialog().getWindow().getAttributes();
             params.width = WindowManager.LayoutParams.MATCH_PARENT;
-            params.height = WindowManager.LayoutParams.MATCH_PARENT;
+            params.height = WindowManager.LayoutParams.WRAP_CONTENT;
             getDialog().getWindow().setAttributes(params);
         }
         super.onResume();
@@ -82,7 +82,7 @@ public class YouTubeDialog extends DialogFragment implements YouTubePlayer.OnIni
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
         Log.d(TAG, "onInitializationSuccess: done initializing.");
         if (!b) {
-            youTubePlayer.setPlayerStyle(YouTubePlayer.PlayerStyle.DEFAULT);
+            youTubePlayer.setPlayerStyle(YouTubePlayer.PlayerStyle.MINIMAL);
             youTubePlayer.loadVideo(YOUTUBE_URL);
             youTubePlayer.play();
         }
