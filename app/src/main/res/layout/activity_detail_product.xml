@@ -10,7 +10,7 @@
 
         <variable
             name="openFoodFact"
-            type="com.leothos.savemyplanet.models.OpenFoodFact" />
+            type="com.leothos.savemyplanet.data.api.models.OpenFoodFact" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".controlers.activities.DetailProductActivity">
+        tools:context=".views.controlers.activities.DetailProductActivity">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"

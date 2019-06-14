@@ -2,8 +2,8 @@ package com.leothos.savemyplanet;
 
 import android.support.test.runner.AndroidJUnit4;
 
-import com.leothos.savemyplanet.api.StreamApi;
-import com.leothos.savemyplanet.models.OpenFoodFact;
+import com.leothos.savemyplanet.data.api.StreamApi;
+import com.leothos.savemyplanet.data.api.models.OpenFoodFact;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

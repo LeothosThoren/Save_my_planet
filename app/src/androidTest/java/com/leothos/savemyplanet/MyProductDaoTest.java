@@ -5,8 +5,8 @@ import android.arch.persistence.room.Room;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.leothos.savemyplanet.database.MyProductDataBase;
-import com.leothos.savemyplanet.entities.MyProduct;
+import com.leothos.savemyplanet.data.database.MyProductDataBase;
+import com.leothos.savemyplanet.data.database.entities.MyProduct;
 
 import org.junit.After;
 import org.junit.Before;

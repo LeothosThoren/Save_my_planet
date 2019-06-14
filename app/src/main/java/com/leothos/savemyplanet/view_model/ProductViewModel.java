@@ -3,8 +3,8 @@ package com.leothos.savemyplanet.view_model;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
-import com.leothos.savemyplanet.entities.MyProduct;
-import com.leothos.savemyplanet.repositories.MyProductDataRepository;
+import com.leothos.savemyplanet.data.database.entities.MyProduct;
+import com.leothos.savemyplanet.data.repositories.MyProductDataRepository;
 
 import java.util.List;
 import java.util.concurrent.Executor;

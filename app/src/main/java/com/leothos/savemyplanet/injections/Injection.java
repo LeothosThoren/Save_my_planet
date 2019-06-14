@@ -2,8 +2,8 @@ package com.leothos.savemyplanet.injections;
 
 import android.content.Context;
 
-import com.leothos.savemyplanet.database.MyProductDataBase;
-import com.leothos.savemyplanet.repositories.MyProductDataRepository;
+import com.leothos.savemyplanet.data.database.MyProductDataBase;
+import com.leothos.savemyplanet.data.repositories.MyProductDataRepository;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;

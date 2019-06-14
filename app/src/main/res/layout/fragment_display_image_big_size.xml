@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".controlers.fragments.DisplayImageBigSize">
+        tools:context=".views.controlers.fragments.DisplayImageBigSize">
 
         <ImageButton
             android:id="@+id/close_button"

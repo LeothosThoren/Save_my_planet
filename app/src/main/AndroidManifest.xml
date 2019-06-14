@@ -25,9 +25,8 @@
             android:value="barcode" />
 
         <activity
-            android:name=".controlers.activities.MainActivity"
+            android:name=".views.controlers.activities.MainActivity"
             android:label="@string/title_activity_main"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
@@ -36,20 +35,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".controlers.activities.DetailProductActivity"
+            android:name=".views.controlers.activities.DetailProductActivity"
             android:label="@string/product_detail">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".controlers.activities.MainActivity" />
+                android:value=".views.controlers.activities.MainActivity" />
         </activity>
         <activity
-            android:name=".controlers.activities.BarcodeCaptureActivity"
+            android:name=".views.controlers.activities.BarcodeCaptureActivity"
             android:label="@string/read_barcode"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".controlers.activities.MainActivity" />
+                android:value=".views.controlers.activities.MainActivity" />
         </activity>
 
     </application>
