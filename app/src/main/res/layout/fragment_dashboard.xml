@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorSoftGrey"
         tools:context=".views.controlers.fragments.Dashboard">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_dashboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/stop_palm_oil"
+            app:titleTextColor="@color/colorWhite" />
+
 
         <!--Carousel-->
         <ViewSwitcher
@@ -14,7 +29,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inAnimation="@android:anim/fade_in"
-            android:outAnimation="@android:anim/fade_out">
+            android:outAnimation="@android:anim/fade_out"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_dashboard">
+
             <!--External library-->
             <com.flaviofaria.kenburnsview.KenBurnsView
                 android:id="@+id/presentation1"
@@ -34,10 +53,14 @@
         <!--Grid Layout-->
         <android.support.v7.widget.GridLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_below="@id/viewSwitcher"
             android:padding="4dp"
             app:columnCount="2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewSwitcher"
             app:rowCount="2"
             app:useDefaultMargins="true">
 
@@ -192,5 +215,5 @@
 
         </android.support.v7.widget.GridLayout>
 
-    </RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
 </layout>

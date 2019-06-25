@@ -49,5 +49,9 @@
     <string name="go_back">Retour</string>
     <string name="product_detail">Détail du produit</string>
     <string name="unable_to_start_camera_source">Impossible de démarrer la caméra.</string>
-    <string name="text_helper">"Placez le code barre à l'intérieur du carré blanc "</string>
+    <string name="text_helper">"Placez le code barre à l'intérieur du rectangle blanc "</string>
+    <string name="cancel">Annuler</string>
+    <string name="dialog_message">Voulez-vous quitter l\'application ?</string>
+    <string name="dialog_title">Quitter ?</string>
+    <string name="stop_palm_oil">Stop à l\'huile de palme !</string>
 </resources>

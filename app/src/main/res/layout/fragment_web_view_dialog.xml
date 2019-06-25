@@ -15,8 +15,8 @@
 
             <ImageButton
                 android:id="@+id/close_web_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/cross_size"
+                android:layout_height="@dimen/cross_size"
                 android:background="@color/colorBlack"
                 android:contentDescription="@string/close_window"
                 android:padding="5dp"

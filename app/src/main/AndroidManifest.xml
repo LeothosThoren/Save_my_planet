@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.leothos.savemyplanet">
 
     <uses-feature android:name="android.hardware.camera" />
@@ -14,9 +15,10 @@
         android:fullBackupContent="false"
         android:hardwareAccelerated="true"
         android:icon="@drawable/ic_planet_earth"
-        android:label="@string/app_name"
+        android:label="@string/stop_palm_oil"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -26,7 +28,7 @@
 
         <activity
             android:name=".views.controlers.activities.MainActivity"
-            android:label="@string/title_activity_main"
+            android:label="@string/stop_palm_oil"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden">

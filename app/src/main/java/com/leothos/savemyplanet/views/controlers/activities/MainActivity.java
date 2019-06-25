@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -35,10 +36,12 @@ public class MainActivity extends AppCompatActivity {
         return false;
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         int id = getIntent().getIntExtra(BarcodeCaptureActivity.INTENT_PUT_EXTRA, 0);
         this.configureBottomNavigationView(id);
 
@@ -75,5 +78,18 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.content_frame, fragment).commit();
     }
 
+    @Override
+    public void onBackPressed() {
+        // Do nothing
+    }
 
+    @Override
+    public boolean onKeyDown(int key_code, KeyEvent key_event) {
+        if (key_code == KeyEvent.KEYCODE_BACK) {
+            super.onKeyDown(key_code, key_event);
+            return true;
+        }
+
+        return false;
+    }
 }

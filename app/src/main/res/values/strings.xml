@@ -48,6 +48,10 @@
     <string name="go_back">Return</string>
     <string name="product_detail">Product detail</string>
     <string name="unable_to_start_camera_source">Unable to start camera source.</string>
-    <string name="text_helper">Put the barcode inside the white square</string>
+    <string name="text_helper">Put the barcode inside the white rectangle</string>
+    <string name="cancel">Cancel</string>
+    <string name="dialog_message">Would you like to leave the application?</string>
+    <string name="dialog_title">Leave?</string>
+    <string name="stop_palm_oil">Stop palm oil!</string>
 
 </resources>

@@ -20,6 +20,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
@@ -32,15 +33,15 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.leothos.savemyplanet.R;
-import com.leothos.savemyplanet.view_model.ProductViewModel;
 import com.leothos.savemyplanet.data.api.StreamApi;
-import com.leothos.savemyplanet.views.controlers.fragments.DisplayImageBigSize;
-import com.leothos.savemyplanet.databinding.ActivityDetailProductBinding;
+import com.leothos.savemyplanet.data.api.models.OpenFoodFact;
 import com.leothos.savemyplanet.data.database.entities.MyProduct;
+import com.leothos.savemyplanet.databinding.ActivityDetailProductBinding;
 import com.leothos.savemyplanet.injections.Injection;
 import com.leothos.savemyplanet.injections.ViewModelFactory;
-import com.leothos.savemyplanet.data.api.models.OpenFoodFact;
 import com.leothos.savemyplanet.utils.SnackAction;
+import com.leothos.savemyplanet.view_model.ProductViewModel;
+import com.leothos.savemyplanet.views.controlers.fragments.DisplayImageBigSize;
 
 import java.util.Calendar;
 
@@ -108,12 +109,14 @@ public class DetailProductActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id) {
-            case R.id.menu_scan:
-                Intent i = new Intent(this, BarcodeCaptureActivity.class);
-                startActivity(i);
-                finish();
-                break;
+        if (id == R.id.menu_scan) {
+            Intent i = new Intent(this, BarcodeCaptureActivity.class);
+            startActivity(i);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                finishAndRemoveTask();
+            } else {
+                finishAffinity();
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -207,6 +210,13 @@ public class DetailProductActivity extends AppCompatActivity {
 
         mProductViewModel.insertProduct(products);
         Toast.makeText(this, R.string.product_saved, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     // -------------

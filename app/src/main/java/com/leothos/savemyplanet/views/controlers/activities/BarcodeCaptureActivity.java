@@ -72,10 +72,10 @@ public final class BarcodeCaptureActivity extends AppCompatActivity implements B
     // constants used to pass extra data in the intent
     public static final String BarcodeObject = "Barcode";
     public static final String INTENT_PUT_EXTRA = "BarcodeCaptureActivity";
-    private static final String TAG = BarcodeCaptureActivity.class.getSimpleName();
     public static final int SCANNER_ITEM = 1;
     public static final int HOME_ID = 0;
     public static final int HISTORY_ID = 1;
+    private static final String TAG = BarcodeCaptureActivity.class.getSimpleName();
     // intent request code to handle updating play services if needed.
     private static final int RC_HANDLE_GMS = 9001;
     // permission request codes need to be < 256
@@ -266,10 +266,16 @@ public final class BarcodeCaptureActivity extends AppCompatActivity implements B
         DialogInterface.OnClickListener listener = (dialog, id) -> finish();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Save my planet")
+        builder.setTitle(getString(R.string.stop_palm_oil))
                 .setMessage(R.string.no_camera_permission)
                 .setPositiveButton(R.string.ok, listener)
                 .show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     /**
@@ -290,6 +296,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity implements B
         if (mCameraSource != null) {
             try {
                 mPreview.start(mCameraSource, mGraphicOverlay);
+                mCameraSource.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
             } catch (IOException e) {
                 Log.e(TAG, getString(R.string.unable_to_start_camera_source), e);
                 mCameraSource.release();
@@ -348,7 +355,6 @@ public final class BarcodeCaptureActivity extends AppCompatActivity implements B
         } else {
             mCameraSource.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
         }
-        Log.d(TAG, "onResume: checked? " + isFlashActive);
 
     }
 
